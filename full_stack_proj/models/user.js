@@ -1,18 +1,19 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose') // Importing mongoose
+const Schema = mongoose.Schema // Destructuring Schema from mongoose
 
+// Defining a new Schema
 const userSchema = new Schema({
     username: {
-        type: String,
-        required: true,
-        lowercase: true, //forces username to register in lowercase
-        unique: true // Mongoose installed throws err if similar username exists
+        type: String, // Data type is String
+        required: true, // This field is required
+        lowercase: true, // This will convert the username to lowercase before saving
+        unique: true // This ensures the username is unique in the database
     },
     password:{
-        type :String ,
-        required: true
+        type :String , // Data type is String
+        required: true // This field is required
     }
 })
 
-
+// Exporting the User model
 module.exports = mongoose.model('User', userSchema)
