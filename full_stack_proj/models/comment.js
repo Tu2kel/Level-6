@@ -1,12 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const issueSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
+const commentSchema = new Schema({
+  text: {
     type: String,
     required: true,
   },
@@ -15,18 +11,15 @@ const issueSchema = new Schema({
     ref: 'User', // Assuming you have a User model for storing user information
     required: true,
   },
-  upvotes: [{
+  issue: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to users who upvoted this issue
-  }],
-  downvotes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to users who downvoted this issue
-  }],
+    ref: 'Issue', // Reference to the Issue model
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model('Issue', issueSchema);
+module.exports = mongoose.model('Comment', commentSchema);

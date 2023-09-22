@@ -4,43 +4,53 @@ require("dotenv").config();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const expressjwt = require("express-jwt");
+const jwt = require("jsonwebtoken");
+const authRouter = require("./routes/authRouter"); // Check if the path is correct
 
-//Middleware
 
-app.use(express.json()); //parses data
-app.use(morgan("dev")); //logs to console
+// Middleware
+app.use(express.json()); // Parses data
+app.use(morgan("dev")); // Logs to console
 
 mongoose.set("strictQuery", true);
 
-//connect to DB
+// Connect to DB
 mongoose.connect(
   "mongodb+srv://kelleyanthonyk:YZEJ5lvMl0gPfMIe@cluster0.tnwv1cv.mongodb.net/Vote",
+  { useNewUrlParser: true, useUnifiedTopology: true }, // Add options for MongoDB connection
   (err) => {
-    console.log("connected to DB", err);
+    if (err) {
+      console.error("Error connecting to the database:", err);
+    } else {
+      console.log("Connected to the database");
+    }
   }
 );
 
-//Routes
-app.use("/user", require("./routes/userRouter"));// User authentication routes
-app.use("/user/issue", require("./routes/userRouter"));// User authentication routes
-app.use("/user/comments", require("./routes/userRouter"));// User authentication routes
-//app.use("/vote", require("./routes/userRouter"));// User authentication routes
-// app.use("/auth", require("./routes/authRouter.js"));
-app.use("/user", expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
-); //api is buffer checks Secret | req.user
+// Routes
+app.use("/user", require("./routes/userRouter")); // User authentication routes
+app.use("/issue", require("./routes/issueRouter")); // Routes for issues
+app.use("/comment", require("./routes/commentRouter")); // Routes for comments
+app.use("/vote", require("./routes/voteRouter")); // Routes for votes
+app.use("/auth", require("./routes/authRouter"));
 
+// Middleware for JWT authentication
+app.use(
+  "/api",
+  expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
+);
 
 // Add routes for political issues, comments, and votes here
 
-//Error Handler
+// Error Handler
 app.use((err, req, res, next) => {
-  console.log(err);
-  return res.send({
-    errMsg: err.message, //from loginRouter
+  console.error(err);
+  return res.status(500).json({
+    errMsg: err.message,
   });
 });
 
-//Server Listen
+// Server Listen
 app.listen(7272, () => {
   console.log(`Listening on port 7272`);
 });
