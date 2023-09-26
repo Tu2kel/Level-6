@@ -3,9 +3,8 @@ const app = express();
 require("dotenv").config();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const expressjwt = require("express-jwt");
-const jwt = require("jsonwebtoken");
-const authRouter = require("./routes/authRouter"); // Check if the path is correct
+const { expressjwt } = require("express-jwt");
+
 
 
 // Middleware
@@ -28,11 +27,11 @@ mongoose.connect(
 );
 
 // Routes
-app.use("/user", require("./routes/userRouter")); // User authentication routes
-app.use("/issue", require("./routes/issueRouter")); // Routes for issues
-app.use("/comment", require("./routes/commentRouter")); // Routes for comments
+app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
+app.use("/issue", require("./routes/issueRouter")); // ✅Routes for issues
+app.use("/comment", require("./routes/commentRouter")); // ✅Routes for comments
 app.use("/vote", require("./routes/voteRouter")); // Routes for votes
-app.use("/auth", require("./routes/authRouter"));
+app.use("/auth", require("./routes/authRouter")); // Routes for login, logout
 
 // Middleware for JWT authentication
 app.use(

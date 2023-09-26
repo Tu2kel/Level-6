@@ -2,12 +2,12 @@ const express = require("express");
 const voteRouter = express.Router();
 const Issue = require("../models/issue");
 const User = require("../models/user");
-// const authMiddleware = require("../middleware/auth");
+
 
 // Upvote a political issue (requires authentication)
 voteRouter.put("/:issueId/upvote", (req, res, next) => {
   const issueId = req.params.issueId;
-  const userId = req.user._id; // User ID from the authenticated user
+  // const userId = req.user._id; // User ID from the authenticated user
 
   // Find the issue by ID
   Issue.findById(issueId, (err, issue) => {

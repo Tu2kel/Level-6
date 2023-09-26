@@ -1,15 +1,25 @@
 const express = require("express");
 const commentRouter = express.Router();
 const Comment = require("../models/comment");
-// const authMiddleware = require("../middleware/auth"); // Import authentication middleware
 
-// Create a new comment on a political issue (requires authentication)
+// ✅Get all comments
+commentRouter.get("/", (req, res, next) => {
+  Comment.find({}, (err, comments) => {
+    if (err) {
+      return next(err);
+    }
+    
+    res.status(200).json(comments);
+  });
+});
+
+//✅Create a new comment on a political issue (requires authentication)
 commentRouter.post("/", (req, res, next) => {
   const { issueId, text } = req.body;
   const newComment = new Comment({
     issue: issueId, // Assuming you store the issue ID in the request body
     text,
-    createdBy: req.user._id, // Assuming you store the user ID in the token
+    // createdBy: req.user._id, // Assuming you store the user ID in the token
   });
   
   newComment.save((err, savedComment) => {
@@ -21,10 +31,10 @@ commentRouter.post("/", (req, res, next) => {
   });
 });
 
-// Get all comments for a specific political issue
+//🤦🏽‍♂️🤷🏽🤷🏽‍♂️ Get comments for a specific political issue
 commentRouter.get("/:issueId", (req, res, next) => {
   const issueId = req.params.issueId;
-  Comment.find({ issue: issueId }, (error, comments) => {
+  Comment.find({ issue: issueId }, (err, comments) => {
     if (err) {
       return next(err);
     }
@@ -33,10 +43,10 @@ commentRouter.get("/:issueId", (req, res, next) => {
   });
 });
 
-// Delete a comment (requires authentication)
+//❌Delete a comment (requires authentication)
 commentRouter.delete("/:commentId", (req, res, next) => {
   const commentId = req.params.commentId;
-  const userId = req.user._id; // User ID from the authenticated user
+  // const userId = req.user._id; // User ID from the authenticated user
 
   // Find the comment by ID
   Comment.findById(commentId, (err, comment) => {
@@ -58,7 +68,6 @@ commentRouter.delete("/:commentId", (req, res, next) => {
       if (err) {
         return next(err);
       }
-
       res.status(204).send(); // No content on successful deletion
     });
   });

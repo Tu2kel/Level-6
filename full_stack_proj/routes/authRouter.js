@@ -1,5 +1,5 @@
 const express = require("express");
-const userRouter = express.Router();
+const authRouter = express.Router();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
@@ -20,7 +20,6 @@ authRouter.post('/signup', (req, res, next) => {
                 res.status(500)
                 return next(err)
             }
-
             const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
             return res.status(201).send({ token, user: savedUser })
         })

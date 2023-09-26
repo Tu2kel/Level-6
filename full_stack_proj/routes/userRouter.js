@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 //Signup, Login, Logout 
 
-//Get All
+//Get All✅
 userRouter.get("/", (req, res, next) => {
   User.find((err, username) => {
     if (err) {
@@ -14,23 +14,31 @@ userRouter.get("/", (req, res, next) => {
     }
     return res.status(201).send(username);
   });
-});
+}); 
 
-//Get One
+//Get One✅
 userRouter.get("/:usernameId", (req, res, next) => {
   const usernameId = req.params.usernameId;
-  const foundUser = User.find((username) => username._id === usernameId);
-  if (!foundUser) {
-    const error = new Error(`User ${usernameId} Not Found in DB`);
-    res.status(500);
-    return next(error);
-  }
-  res.status(200).send(foundUser);
+  User.findById(usernameId, (err, foundUser) => {
+    if (err) {
+      res.status(500);
+      return next(err);
+    }
+    if (!foundUser) {
+      const error = new Error(`User ${usernameId} Not Found in DB`);
+      res.status(404); // Change to 404 status code for "Not Found"
+      return next(error);
+    }
+    // Convert the foundUser to a plain JavaScript object toObject()
+    const userObject = foundUser.toObject();
+    res.status(200).send(userObject);
+  });
 });
+
 
 //
 
-//Post
+//Post ✅
 userRouter.post("/user", (req, res, next) => {
   User.find({ username: req.body.username.toLowerCase() }, (err, user) => {
     if(err){
@@ -54,28 +62,10 @@ userRouter.post("/user", (req, res, next) => {
   });
 });
 
-//Login
-// userRouter.post("/issue", (req, res, next) => {
-//   User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
-//     if (err) {
-//       res.status(500);
-//       return next(err);
-//     }
-//     if (!user) {
-//       res.status(403);
-//       return next(new Error("Username or Password are incorrect"));
-//     }
-//     if (req.body.password !== user.password) {
-//       res.status(403);
-//       return next(new Error("Username or Password are incorrect."));
-//     }
-//     const token = jwt.sign(user.toObject(), process.env.SECRET);
-//     return res.status(200).send({ token, user });
-//   });
-// });
 
-//Delete
-userRouter.delete("/usernameId", (req, res, next) => {
+
+//Delete✅
+userRouter.delete("/:usernameId", (req, res, next) => {
   User.findOneAndDelete({ _id: req.params.usernameId }, (err, deleteUser) => {
     if (err) {
       res.status(500);
@@ -85,7 +75,7 @@ userRouter.delete("/usernameId", (req, res, next) => {
   });
 });
 
-//Update one
+//Update one✅
 userRouter.put("/:usernameId", (req, res, next) => {
   User.findByIdAndUpdate(
     { _id: req.params.usernameId },

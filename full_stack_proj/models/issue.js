@@ -12,8 +12,8 @@ const issueSchema = new Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Assuming you have a User model for storing user information
-    required: true,
+    ref: 'User', // need User model for storing user information
+    // required: true,
   },
   upvotes: [{
     type: mongoose.Schema.Types.ObjectId,
