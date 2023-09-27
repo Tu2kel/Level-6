@@ -3,7 +3,19 @@ const authRouter = express.Router();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-//Signup
+
+//Get All✅
+authRouter.get("/", (req, res, next) => {
+  User.find({}, (err, users) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.status(200).json(users);
+  });
+});
+
+//Signup✅
 authRouter.post('/signup', (req, res, next) => {
     User.findOne({ username: req.body.username.toLowerCase()}, (err, user) => {
         if(err){
@@ -26,7 +38,7 @@ authRouter.post('/signup', (req, res, next) => {
     })
 })
 
-//Login 
+//Login✅
 
 authRouter.post("/login", (req, res, next) => {
   User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {

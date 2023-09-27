@@ -50,6 +50,6 @@ app.use((err, req, res, next) => {
 });
 
 // Server Listen
-app.listen(7272, () => {
-  console.log(`Listening on port 7272`);
+app.listen(7262, () => {
+  console.log(`Listening on port 7262`);
 });
