@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 mongoose.set("strictQuery", true);
 
 mongoose.connect(
-  "mongodb+srv://kelleyanthonyk:YZEJ5lvMl0gPfMIe@cluster0.tnwv1cv.mongodb.net/practice",
+  "mongodb+srv://kelleyanthonyk:YZEJ5lvMl0gPfMIe@cluster0.tnwv1cv.mongodb.net/user_authentication",
   (err) => {
     console.log("connected to DB", err);
   }

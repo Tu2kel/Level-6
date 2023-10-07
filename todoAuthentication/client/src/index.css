@@ -59,9 +59,13 @@
   border-radius: 4px;
 }
 
-/* .todo_list{
-
-} */
+.todo_list{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red ;
+  height: 100vh;
+  width: 100%;
+}
 
 .public {
   height: 100vh;

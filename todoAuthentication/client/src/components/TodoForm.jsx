@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Todo from './Todo'
+
 
 const initInputs = {
   title: "",
@@ -25,6 +27,7 @@ export default function TodoForm(props){
   }
 
   const { title, description, imgUrl } = inputs
+  
   return (
     <form onSubmit={handleSubmit}>
       <input 

@@ -15,6 +15,8 @@ todoRouter.get("/", (req, res, next) => {
 
 // Get todos by user id
 todoRouter.get("/user", (req, res, next) => {
+  // console.log(req);
+  // need to use req.auth
   Todo.find({ user: req.auth._id }, (err, todos) => {
     if (err) {
       res.status(500);
@@ -28,8 +30,9 @@ todoRouter.get("/user", (req, res, next) => {
 todoRouter.post("/", async (req, res, next) => {
   try {
     // Add the user's ID from authentication to the request body
-    req.body.user = req.auth._id;
 
+    req.body.user = req.auth._id;
+    console.log("req inside routerPost", req);
     // Create a new Todo instance using the request body
     const newTodo = new Todo(req.body);
 
@@ -53,7 +56,6 @@ todoRouter.post("/", async (req, res, next) => {
     }
   }
 });
-
 
 // Delete Todo
 todoRouter.delete("/:todoId", (req, res, next) => {

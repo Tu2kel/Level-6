@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
 export const UserContext = React.createContext();
 
@@ -35,7 +35,7 @@ export default function UserProvider(props) {
           token,
         }));
       } catch (error) {
-        console.error("Error during signup: Username Taken", error);
+        handleAuthErr("Error during signup: Username Taken", error);
       }
     }
 
@@ -44,7 +44,8 @@ export default function UserProvider(props) {
         console.log("login in userpro", credentials);
         axios
           .post("/auth/login", credentials)
-          .then((res) => {
+          .then(res => {
+            console.log(res.data)
             console.log("Login response:", res.data);
             const { user, token } = res.data;
             localStorage.setItem("token", token);
@@ -55,9 +56,9 @@ export default function UserProvider(props) {
               user,
               token,
             }))
-            console.log(user.todos)
+            console.log(todos)
           })
-          .catch((err) => console.error("Login Error", err.response ? err.response.data.errMsg : errMessage));
+          .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function logout(){
@@ -70,10 +71,25 @@ export default function UserProvider(props) {
       })
     }
 
+    function handleAuthErr(errMsg){
+      setUserState(prevState => ({
+        ...prevState, 
+        errMsg
+      }))
+    }
+
+    function resetAuthErr(){
+      setUserState(prevState => ({
+        ...prevState,
+        errMsg:" "
+      }))
+    }
+
     function getUserTodos() {
-      userAxios
-        .get("/api/todo/user")
+      
+      userAxios.get("/api/todo/user")
         .then((res) => {
+          // console.log("inside user Todos", res.data);
           setUserState((prevState) => ({
             ...prevState,
             todos: res.data
@@ -85,6 +101,7 @@ export default function UserProvider(props) {
     
 
     async function addTodo(newTodo) {
+      console.log('addTodo Func newTodo:', newTodo)
       try {
         const response = await userAxios.post("/api/todo", newTodo);
         const updatedTodos = [...userState.todos, response.data];
@@ -110,7 +127,8 @@ export default function UserProvider(props) {
         signup,
         login,
         logout,
-        addTodo
+        addTodo,
+        resetAuthErr
       }}>
       { props.children }
     </UserContext.Provider>
