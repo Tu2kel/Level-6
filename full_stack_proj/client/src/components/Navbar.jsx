@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const { logout, token } = props;
   return (
     <div className="navbar">
-      <Link to="/profile">Profile = Comment</Link>
+      <Link to="/profile">Profile</Link>
       <Link to="/public">Public = Vote </Link>
+      <button onClick={logout}>Logout</button>
     </div>
-  );
+  )
 }

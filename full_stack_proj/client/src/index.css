@@ -59,9 +59,21 @@
   border-radius: 4px;
 }
 
-/* .todo_list{
+.issue_list{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red ;
+  height: 200vh;
+  width: 100%;
+}
 
-} */
+.issue_info{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red ;
+  height: 50vh;
+  width: 100%;
+}
 
 .public {
   height: 100vh;

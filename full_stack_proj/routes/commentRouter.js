@@ -19,7 +19,7 @@ commentRouter.post("/", (req, res, next) => {
   const newComment = new Comment({
     issue: issueId, // Assuming you store the issue ID in the request body
     text,
-    // createdBy: req.user._id, // Assuming you store the user ID in the token
+    createdBy: req.auth._id, // Assuming you store the user ID in the token
   });
   
   newComment.save((err, savedComment) => {

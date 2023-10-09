@@ -5,8 +5,6 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const { expressjwt } = require("express-jwt");
 
-
-
 // Middleware
 app.use(express.json()); // Parses data
 app.use(morgan("dev")); // Logs to console
@@ -15,7 +13,7 @@ mongoose.set("strictQuery", true);
 
 // Connect to DB
 mongoose.connect(
-  "mongodb+srv://kelleyanthonyk:YZEJ5lvMl0gPfMIe@cluster0.tnwv1cv.mongodb.net/Vote",
+  "mongodb+srv://kelleyanthonyk:YZEJ5lvMl0gPfMIe@cluster0.tnwv1cv.mongodb.net/RTV",
   { useNewUrlParser: true, useUnifiedTopology: true }, // Add options for MongoDB connection
   (err) => {
     if (err) {
@@ -27,19 +25,28 @@ mongoose.connect(
 );
 
 // Routes
-app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
-app.use("/issue", require("./routes/issueRouter")); // ✅Routes for issues
-app.use("/comment", require("./routes/commentRouter")); // ✅Routes for comments
-app.use("/vote", require("./routes/voteRouter")); // Routes for votes
-app.use("/auth", require("./routes/authRouter")); // Routes for login, logout
+
+// Routes for login, logout
+  app.use("/auth", require("./routes/authRouter")); 
+
+// ✅Routes for issues
+    app.use("/issue", require("./routes/issueRouter")); 
+
+// ✅Routes for comments
+  app.use("/comment", require("./routes/commentRouter")); 
+
+  app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
+  
+  app.use("/vote", require("./routes/voteRouter")); // Routes for votes
 
 // Middleware for JWT authentication
-app.use(
-  "/api",
+  app.use("/api",
   expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
 );
 
 // Add routes for political issues, comments, and votes here
+app.use("/api/issue", require("./routes/issueRouter.js"));
+
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -50,6 +57,6 @@ app.use((err, req, res, next) => {
 });
 
 // Server Listen
-app.listen(7262, () => {
+  app.listen(7262, () => {
   console.log(`Listening on port 7262`);
 });
