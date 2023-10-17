@@ -1,17 +1,25 @@
-import React, { useContext } from "react";
-import IssueForm from "./IssueForm"; // REPLACE
+import React, { useContext, useEffect } from "react";
+import IssueForm from "./IssueForm"; 
 import IssueList from "./IssueList";
 import Issue from "./Issue";
 import { UserContext } from "../context/UserProvider";
 
-export default function Profile() {
+export default function Profile(props) {
   const {
     user: { username },
     addIssue,
     issues,
+    // comment //MARK FOR DELETION
+   
   } = useContext(UserContext);
-  console.log(issues);
-  console.log(username);
+
+  // Saves issues to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("issues", JSON.stringify(issues));
+  }, [issues]);
+  
+  console.log("in Profile line 21", 'Name:', username, 'Issue:', issues);
+  
 
   return (
     <div className="profile">
@@ -20,6 +28,9 @@ export default function Profile() {
       <IssueForm addIssue={addIssue} />
       <h3>Your Issue</h3>
       <IssueList issues={issues} />
+      
+      
     </div>
   );
 }
+

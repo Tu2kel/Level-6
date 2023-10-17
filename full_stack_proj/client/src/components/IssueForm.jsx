@@ -4,6 +4,7 @@ const initInputs = {
   title: "",
   description: "",
   imgUrl: "",
+  comment: "", // Include 'comment' in the initial state
 };
 
 export default function IssueForm(props) {
@@ -12,7 +13,6 @@ export default function IssueForm(props) {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    console.log(e, 'IsForm handleChange');
     setInputs((prevInputs) => ({
       ...prevInputs,
       [name]: value,
@@ -20,13 +20,12 @@ export default function IssueForm(props) {
   }
 
   function handleSubmit(e) {
-    console.log(e, 'handleSubmit IsForm');
     e.preventDefault();
     addIssue(inputs);
     setInputs(initInputs);
   }
 
-  const { title, description, imgUrl } = inputs;
+  const { title, description, imgUrl, comment } = inputs;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -51,6 +50,14 @@ export default function IssueForm(props) {
         onChange={handleChange}
         placeholder="Image Url"
       />
+      <input
+        type="text"
+        name="comment"
+        value={comment}
+        onChange={handleChange}
+        placeholder="Enter Comment"
+      ></input>
+
       <button>Add Issue</button>
     </form>
   );

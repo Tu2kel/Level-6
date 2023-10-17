@@ -46,6 +46,7 @@ mongoose.connect(
 
 // Add routes for political issues, comments, and votes here
 app.use("/api/issue", require("./routes/issueRouter.js"));
+app.use("/api/comment", require("./routes/commentRouter"));
 
 
 // Error Handler

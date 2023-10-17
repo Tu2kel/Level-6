@@ -8,23 +8,23 @@ const issueSchema = new Schema({
   },
   description: {
     type: String,
-    // required: true,
+    required: true,
   },
   imgUrl: {
     type: String,
     // required: true
   },
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // need User model for storing user information
-    required: true,
-  },
-  comments: [
+  comment: [ 
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
     },
   ],
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // need User model for storing user information
+    required: true,
+  },
   upvotes: [
     {
       type: mongoose.Schema.Types.ObjectId,

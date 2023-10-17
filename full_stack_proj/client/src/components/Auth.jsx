@@ -39,7 +39,10 @@ export default function Auth() {
     <div className="auth_container">
       <h1>Welcome </h1>
       <h1>Please Login or SignUp</h1>
-      {!toggle ? (// not Toggle go to signup form 
+
+      <p style={{ color: "red" }}>{errMsg}</p> {/* DELETE IF I WANT */}
+
+      {!toggle ? ( // not Toggle go to signup form
         <>
           <AuthForm
             handleChange={handleChange} //
@@ -50,7 +53,8 @@ export default function Auth() {
           />
           <p onClick={toggleForm}>Already a member?</p>
         </>
-      ) : (// else show login form 
+      ) : (
+        // else show login form
         <>
           <AuthForm // value of Comp to specified function
             handleChange={handleChange}

@@ -5,15 +5,17 @@ const bcrypt = require("bcrypt");
 // Defining a new Schema
 const userSchema = new Schema({
   username: {
-    type: String, // Data type is String
-    required: true, // This field is required
+    type: String,
+    required: true,
     lowercase: true, // This will convert the username to lowercase before saving
     unique: true, // This ensures the username is unique in the database
   },
   password: {
-    type: String, // Data type is String
-    required: true, // This field is required
+    type: String,
+    required: true,
   },
+  issues: [{ type: Schema.Types.ObjectId, ref: "Issue" }],
+  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 // pre-save hook to encrypt user passwords on signup

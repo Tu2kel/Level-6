@@ -106,3 +106,15 @@
   padding: 16px;
   border-radius: 5px;
 }
+
+.voteBtnUp, .voteBtnDown{
+  width: 60px;
+  position: relative;
+  left: 20px;
+}
+
+.voteBtnDown{
+  position: relative;
+  left: 120px;
+  bottom: 25px;
+}

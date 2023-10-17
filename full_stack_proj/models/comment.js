@@ -9,12 +9,12 @@ const commentSchema = new Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // User model for storing user information
-    // required: true,
+    required: true,
   },
   issue: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Issue', // Reference to the Issue model
-    // required: true,
+    required: true,
   },
   createdAt: {
     type: Date,
