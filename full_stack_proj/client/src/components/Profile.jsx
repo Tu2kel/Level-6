@@ -9,14 +9,15 @@ export default function Profile(props) {
     user: { username },
     addIssue,
     issues,
+    getUserIssues
     // comment //MARK FOR DELETION
    
   } = useContext(UserContext);
 
   // Saves issues to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("issues", JSON.stringify(issues));
-  }, [issues]);
+    getUserIssues();
+  }, []);
   
   console.log("in Profile line 21", 'Name:', username, 'Issue:', issues);
   

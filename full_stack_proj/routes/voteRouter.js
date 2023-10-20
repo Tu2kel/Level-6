@@ -7,7 +7,7 @@ const User = require("../models/user");
 // Upvote a political issue (requires authentication)
 voteRouter.put("/:issueId/upvote", (req, res, next) => {
   const issueId = req.params.issueId;
-  // const userId = req.user._id; // User ID from the authenticated user
+  const userId = req.createdBy._id; // User ID from the authenticated user
 
   // Find the issue by ID
   Issue.findById(issueId, (err, issue) => {
@@ -47,7 +47,7 @@ voteRouter.put("/:issueId/upvote", (req, res, next) => {
 // Downvote a political issue (requires authentication)
 voteRouter.put("/:issueId/downvote", (req, res, next) => {
   const issueId = req.params.issueId;
-  const userId = req.user._id; // User ID from the authenticated user
+  const userId = req.createdBy._id; // User ID from the authenticated user
 
   // Find the issue by ID
   Issue.findById(issueId, (err, issue) => {

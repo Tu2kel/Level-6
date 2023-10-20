@@ -1,4 +1,5 @@
 import axios from "axios";
+import { set } from "mongoose";
 import React, { useState } from "react";
 
 export const UserContext = React.createContext();
@@ -15,12 +16,13 @@ export default function UserProvider(props) {
   const initState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || "", //state will exist after refresh
-    issues: JSON.parse(localStorage.getItem("issues")) || [],
-    comments: JSON.parse(localStorage.getItem("comments")) || [],
+    issues: [],
     errMsg: "",
   }; 
 
   const [userState, setUserState] = useState(initState);
+
+  const [comments, setComments] = useState([])
 
   function signup(credentials) {
     axios
@@ -51,7 +53,7 @@ export default function UserProvider(props) {
           ...prevUserState,
           user,
           token,
-          // comment: [], //MARK FOR DELETION
+    
         }));
         // console.log(issues);
       })
@@ -65,7 +67,7 @@ export default function UserProvider(props) {
       user: {},
       token: "",
       issues: [],
-      comment: [],
+      // comment: [],
     });
   }
 
@@ -86,7 +88,7 @@ export default function UserProvider(props) {
   function getUserIssues() {
     userAxios.get("/api/issue/user")
       .then((res) => {
-        // console.log("inside user Issues", res.data);
+        console.log("inside user Issues", res.data);
         setUserState((prevState) => ({
           ...prevState,
           issues: res.data,
@@ -111,6 +113,32 @@ export default function UserProvider(props) {
 
   console.log(userState);
 
+  function upVote(issueId){
+    userAxios.put(`/api/issue/upvote/${issueId} `)
+    .then(res => {
+      setUserState(prevState => {
+        return {
+          ...prevState,
+          issues: prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)
+        }
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+  function downVote(issueId){
+    userAxios.put(`/api/issue/downvote/${issueId} `)
+    .then(res => {
+      setUserState(prevState => {
+        return {
+          ...prevState,
+          issues: prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)
+        }
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
 
   
 
@@ -125,6 +153,8 @@ export default function UserProvider(props) {
         getUserIssues,
         resetAuthErr,
         errMsg: userState.errMsg,
+        upVote,
+        downVote
       }}
     >
       {props.children}

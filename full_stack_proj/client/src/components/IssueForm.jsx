@@ -4,7 +4,6 @@ const initInputs = {
   title: "",
   description: "",
   imgUrl: "",
-  comment: "", // Include 'comment' in the initial state
 };
 
 export default function IssueForm(props) {
@@ -25,7 +24,7 @@ export default function IssueForm(props) {
     setInputs(initInputs);
   }
 
-  const { title, description, imgUrl, comment } = inputs;
+  const { title, description, imgUrl } = inputs;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -50,13 +49,13 @@ export default function IssueForm(props) {
         onChange={handleChange}
         placeholder="Image Url"
       />
-      <input
+      {/* <input
         type="text"
         name="comment"
         value={comment}
         onChange={handleChange}
         placeholder="Enter Comment"
-      ></input>
+      ></input> */}
 
       <button>Add Issue</button>
     </form>
