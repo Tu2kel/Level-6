@@ -29,20 +29,20 @@ mongoose.connect(
 // Routes for login, logout
   app.use("/auth", require("./routes/authRouter")); 
 
-// ✅Routes for issues
-    app.use("/issue", require("./routes/issueRouter")); 
-
-// ✅Routes for comments
-  app.use("/comment", require("./routes/commentRouter")); 
-
   app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
   
-  app.use("/vote", require("./routes/voteRouter")); // Routes for votes
+    // ✅Routes for issues
+      // app.use("/issue", require("./routes/issueRouter")); 
+  
+  // ✅Routes for comments
+    // app.use("/comment", require("./routes/commentRouter")); 
+  // app.use("/vote", require("./routes/voteRouter")); // Routes for votes
 
 // Middleware for JWT authentication
-  app.use("/api",
-  expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
-);
+  app.use(
+    "/api",
+    expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
+  );
 
 // Add routes for political issues, comments, and votes here
 app.use("/api/issue", require("./routes/issueRouter.js"));
@@ -55,7 +55,9 @@ app.use((err, req, res, next) => {
   return res.status(500).json({
     errMsg: err.message,
   });
-});
+
+  
+})
 
 // Server Listen
   app.listen(7262, () => {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { set } from "mongoose";
 import React, { useState } from "react";
 
 export const UserContext = React.createContext();
@@ -35,7 +34,6 @@ export default function UserProvider(props) {
           ...prevUserState,
           user,
           token,
-          // comment: [],
         }));
       })
       .catch((err) => handleAuthErr(err.response.data.errMsg));
@@ -67,7 +65,6 @@ export default function UserProvider(props) {
       user: {},
       token: "",
       issues: [],
-      // comment: [],
     });
   }
 
@@ -95,7 +92,7 @@ export default function UserProvider(props) {
         }));
       })
       .catch((err) =>
-        console.log("inside getuserIssues", err.response.data.errMsg)
+        console.log("inside getuserIssue😭", err.response.data.errMsg)
       );
   }
 
@@ -123,7 +120,7 @@ export default function UserProvider(props) {
         }
       })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log('Why upVote not working in public', err))
   }
 
   function downVote(issueId){

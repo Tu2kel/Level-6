@@ -6,7 +6,7 @@ export default function Navbar(props) {
   return (
     <div className="navbar">
       <Link to="/profile">Profile</Link>
-      <Link to="/public">Public = Vote </Link>
+      <Link to="/public">Public Posts </Link>
       <button onClick={logout}>Logout</button>
     </div>
   )
