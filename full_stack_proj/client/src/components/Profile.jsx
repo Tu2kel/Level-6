@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import IssueForm from "./IssueForm"; 
 import IssueList from "./IssueList";
-import Issue from "./Issue";
+// import Issue from "./Issue";
 import { UserContext } from "../context/UserProvider";
 
 export default function Profile(props) {
@@ -10,7 +10,6 @@ export default function Profile(props) {
     addIssue,
     issues,
     getUserIssues
-    // comment //MARK FOR DELETION
    
   } = useContext(UserContext);
 
@@ -19,7 +18,7 @@ export default function Profile(props) {
     getUserIssues();
   }, []);
   
-  console.log("in Profile line 21", 'Name:', username, 'Issue:', issues);
+  // console.log("in Profile line 21", 'Name:', username, 'Issue:', issues);
   
 
   return (

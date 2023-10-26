@@ -1,41 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CommentList from "./CommentList";
+import { UserContext } from "../context/UserProvider";
 import Issue from "./Issue";
 import axios from "axios";
 
 export default function Public(props) {
-  const [allComments, setAllComments] = useState([]);
+  const [issues, setIssues] = useState([]);
+  const { publicIssue } = useContext(UserContext);
 
-  // Function to fetch all comments and set them in the allComments state
-  const getAllComments = async (e) => {
-      try {
-      const response = await axios.get("/api/comment");
-      setAllComments(response.data);
+  const getAllIssues = async () => {
+    try {
+      const response = await axios.get("/api/issue/user");
+      setIssues(response.data);
     } catch (error) {
-      console.error("Error getAllComments in Public.jsx", error);
+      console.error("😭Error in getAllIssues in Public.jsx", error);
     }
   };
 
   useEffect(() => {
-    getAllComments();
+    getAllIssues();
   }, []);
 
   return (
     <div className="public">
       <h1>Public Issues</h1>
       <br />
-      <Issue {...props.issueData} />
-
-      {props.issueData && (
-        <CommentList issueId={props.issueData._id} allComments={allComments} />
-      )}
-
+      {issues.map((issue) => (
+        <div key={issue._id}>
+          <Issue issueData={issue} />
+          <CommentList issueId={issue._id} />
+        </div>
+      ))}
     </div>
   );
 }
-
-{/* <CommentList 
-  issueId={props.issueData._id} allComments={allComments} /> */}
-{/* <CommentList
-    issueId={props.issueData ? props.issueData._id : null}
-      allComments={allComments} */}

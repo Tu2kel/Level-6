@@ -4,11 +4,11 @@ import axios from "axios";
 const CommentForm = ({ issueId }) => {
   const [comment, setComment] = useState("");
 
-  const handleChange = (e) => {
+  const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleCommentSubmit = (e) => {
     e.preventDefault();
 
     // Axios POST request to add a comment for the issue
@@ -27,11 +27,11 @@ const CommentForm = ({ issueId }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleCommentSubmit}>
         <textarea
           name="comment"
           value={comment}
-          onChange={handleChange}
+          onChange={handleCommentChange}
           placeholder="Leave a comment..."
         ></textarea>
         <button type="submit">Submit Comment</button>

@@ -10,11 +10,8 @@ export default function Issue(props) {
   const [issueComments, setIssueComments] = useState([]);
 
   
-console.log(props);
-  // const [upVoteCount, setUpVoteCount] = useState(0);
-  // const [downVoteCount, setDownVoteCount] = useState(0);
-
-  // console.log(upVote);
+    // console.log(props);
+    // console.log(upVote);
 
   return (
     <div className="issue_info">

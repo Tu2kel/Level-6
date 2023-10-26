@@ -28,25 +28,12 @@ commentRouter.post("/:issueId", (req, res, next) => {
     return res.status(201).send(savedComment);
   });
 });
-/* -*----------------------try to implement the promise all below-----------------*/
-//🤷🏽‍♂️🤷🏽🤷🏽‍♂️ Get comments for a specific political issue
-// commentRouter.get("/:issueId", (req, res, next) => {
-//   const issueId = req.params.issueId;
-//   Comment.find({ issue: issueId }, (err, comments) => {
-//     if (err) {
-//       return next(err);
-//     }
 
-//     res.status(200).json(comments);
-//   });
-// });
-/* -*----------------------try to implement the promise all below-----------------*/
-
+// Get issue by comment by issueId
 commentRouter.get("/:issueId", (req, res, next) => {
   const issueId = req.params.issueId;
 
-  // Use Promise.all to fetch the issue and its comments in parallel
-  Promise.all([
+    Promise.all([
     Issue.findOne({ _id: issueId }).exec(),
     Comment.find({ issue: issueId }).exec(),
   ])
@@ -85,7 +72,7 @@ commentRouter.delete("/:commentId", (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.status(204).send(); // No content on successful deletion
+      res.status(204).send(); 
     });
   });
 });

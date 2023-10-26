@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const UserContext = React.createContext();
 
 const userAxios = axios.create();
+
 
 userAxios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
@@ -21,7 +22,9 @@ export default function UserProvider(props) {
 
   const [userState, setUserState] = useState(initState);
 
-  const [comments, setComments] = useState([])
+  // const [comments, setComments] = useState([])
+
+  const [ publicIssue, setPublicIssue ] = useState([])
 
   function signup(credentials) {
     axios
@@ -40,8 +43,7 @@ export default function UserProvider(props) {
   }
 
   function login(credentials) {
-    axios
-      .post("/auth/login", credentials)
+    axios.post("/auth/login", credentials)
       .then((res) => {
         const { user, token } = res.data
         localStorage.setItem("token", token)
@@ -53,7 +55,7 @@ export default function UserProvider(props) {
           token,
     
         }));
-        // console.log(issues);
+        // console.log('token:', token);
       })
       .catch((err) => handleAuthErr(err));
   }
@@ -82,10 +84,19 @@ export default function UserProvider(props) {
     }));
   }
 
+  function getAllIssues(){
+    axios.get("/api/issue")
+    .then(res => {
+      setPublicIssue(res.data)
+    })
+    .catch(err => console.log(`token?😭 `, err.response.data.errMsg))
+    console.log("publicIssues", publicIssue )
+  }
+
   function getUserIssues() {
     userAxios.get("/api/issue/user")
       .then((res) => {
-        console.log("inside user Issues", res.data);
+        // console.log("inside user Issues", res.data);
         setUserState((prevState) => ({
           ...prevState,
           issues: res.data,
@@ -96,6 +107,7 @@ export default function UserProvider(props) {
       );
   }
 
+ 
   function addIssue(newIssue) {
     userAxios
       .post("/api/issue", newIssue)
@@ -106,9 +118,9 @@ export default function UserProvider(props) {
         }));
       })
       .catch((err) => console.log(err));
-  }
+    }
 
-  console.log(userState);
+  // console.log('userState:', userState);
 
   function upVote(issueId){
     userAxios.put(`/api/issue/upvote/${issueId} `)
@@ -120,7 +132,7 @@ export default function UserProvider(props) {
         }
       })
     })
-    .catch(err => console.log('Why upVote not working in public', err))
+    .catch(err => console.log('upVote:', err))
   }
 
   function downVote(issueId){
@@ -136,22 +148,33 @@ export default function UserProvider(props) {
     .catch(err => console.log(err))
   }
 
-
+//  React.
+ useEffect(() => {
+   getAllIssues()
+ }, [publicIssue.length]);
+ 
+//  React.useEffect(() => {
+//    getAllComments()
+//    // getIssueData();
+//  }, [comments.length]);
   
 
   return (
     <UserContext.Provider
       value={{
         ...userState,
+        publicIssue,
         signup,
         login,
         logout,
         addIssue,
+        getAllIssues,
         getUserIssues,
         resetAuthErr,
-        errMsg: userState.errMsg,
         upVote,
-        downVote
+        downVote,
+        // getAllComments,
+        errMsg: userState.errMsg,
       }}
     >
       {props.children}

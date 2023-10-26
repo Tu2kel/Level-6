@@ -5,14 +5,23 @@ function CommentList({ issueId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    // Fetch comments when component mounts
-    axios
-      .get(`/api/comment/${issueId}`)
+    // Get the JWT token from local storage
+    const token = localStorage.getItem("token");
+
+    // Configure Axios to include the token in the headers
+    const axiosInstance = axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    axiosInstance
+      .get(`/api/comment/${issueId}`) // Assuming you want to fetch comments for a specific issue
       .then((response) => {
         setComments(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching comments:", error);
+        console.log("CommentList UseEffect😭", error);
       });
   }, [issueId]);
 
@@ -36,43 +45,38 @@ function CommentList({ issueId }) {
 
 export default CommentList;
 
-/*----------------OLD BELOW-----------*/
-
-// import React, { useState, useEffect } from "react";
+// import React, { useEffect, useState } from "react";
 // import axios from "axios";
 
-// function CommentList({ issueId, setIssueComments }) {
+// function CommentList({ issueId }) {
 //   const [comments, setComments] = useState([]);
 
-//   const getCommentsForIssue = async () => {
-//     try {
-//       const response = await axios.get(`/api/comment/${issueId}`);
-//       return response.data;
-//     } catch (error) {
-//       console.error("Err at getCommentsForIssue() ", error)
-//       return [];
-//     }
-//   };
-
 //   useEffect(() => {
-//     getCommentsForIssue()
-//       .then((issueComments) => {
-//         setComments(issueComments);
-//         setIssueComments(issueComments); // Passes issue specific comments back to the Issue component
+//     axios
+//       .get(`/api/comment`) //${issueId}
+//       .then((response) => {
+//         setComments(response.data);
 //       })
-//       .catch((error) =>
-//         console.error("Error updating comments useEffect()", error)
-//       );
+//       .catch((error) => {
+//         console.log("CommentList UseEffect😭", error);
+//       });
 //   }, [issueId]);
+//   // console.log( "issueID?:", issueId);
 
 //   return (
 //     <div>
 //       <h2>Comments</h2>
-//       <ul>
-//         {comments.map((comment) => (
-//           <li key={comment._id}>{comment.text}</li>
-//         ))}
-//       </ul>
+//       {comments.length > 0 ? (
+//         <ul>
+//           {comments.map((comment) => (
+//             <li key={comment._id}>
+//               <p>{comment.text}</p>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : (
+//         <p>No comments yet.</p>
+//       )}
 //     </div>
 //   );
 // }
