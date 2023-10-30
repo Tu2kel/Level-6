@@ -4,7 +4,9 @@ import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 
 export default function Issue(props) {
-  const { title, description, imgUrl, _id, upvotes, downvotes } = props
+  const { title, description, imgUrl, _id, upvotes, downvotes, issueData } = props
+  console.log('🟡 issueData ', issueData)
+  // console.log('comment list - issue id:', fish._id, 'props:', props)
 
   const { upVote, downVote } = useContext(UserContext)
   const [issueComments, setIssueComments] = useState([]);
@@ -19,8 +21,8 @@ export default function Issue(props) {
       <h3> {description} </h3>
       <img src={imgUrl} alt={imgUrl} width={200} />
 
-      <CommentForm issueId={_id} />
-      <CommentList issueId={_id} setIssueComments={setIssueComments} />
+      <CommentForm issueId={issueData._id} />
+      <CommentList issueId={issueData._id} setIssueComments={setIssueComments} />
 
       <button onClick={() => upVote(_id)} className="voteBtnUp">
         ⬆️ ⬆️

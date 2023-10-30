@@ -28,7 +28,7 @@ issueRouter.get("/user", (req, res, next) => {
 
 issueRouter.get("/:issueId", (req, res, next) => {
   const issueId = req.params.issueId;
-
+  console.log('issueId', issueId)
   Promise.all([
     Issue.findById(issueId).exec(),
     Comment.find({ issue: issueId }).exec(),

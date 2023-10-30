@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import CommentList from "../components/CommentList";
+CommentList
 
 export const UserContext = React.createContext();
 
@@ -18,13 +20,27 @@ export default function UserProvider(props) {
     token: localStorage.getItem("token") || "", //state will exist after refresh
     issues: [],
     errMsg: "",
-  }; 
+  };
 
   const [userState, setUserState] = useState(initState);
+  const [publicIssue, setPublicIssue] = useState([]);
 
-  // const [comments, setComments] = useState([])
+  // const [comments, setComments] = useState([]);
+  // const { userAxios } = useContext(UserContext);
 
-  const [ publicIssue, setPublicIssue ] = useState([])
+  // useEffect(() => {
+  //   getAllIssues();
+
+  //   userAxios
+  //     .get(`/api/comment/${issueId}`) // Assuming you want to fetch comments for a specific issue
+  //     .then((response) => {
+  //       setComments(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("CommentList UseEffect😭", error);
+  //     });
+      
+  // }, []);
 
   function signup(credentials) {
     axios
@@ -43,17 +59,17 @@ export default function UserProvider(props) {
   }
 
   function login(credentials) {
-    axios.post("/auth/login", credentials)
+    axios
+      .post("/auth/login", credentials)
       .then((res) => {
-        const { user, token } = res.data
-        localStorage.setItem("token", token)
-        localStorage.setItem("user", JSON.stringify(user))
-        getUserIssues()
+        const { user, token } = res.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        getUserIssues();
         setUserState((prevUserState) => ({
           ...prevUserState,
           user,
           token,
-    
         }));
         // console.log('token:', token);
       })
@@ -84,19 +100,22 @@ export default function UserProvider(props) {
     }));
   }
 
-  function getAllIssues(){
-    axios.get("/api/issue")
-    .then(res => {
-      setPublicIssue(res.data)
-    })
-    .catch(err => console.log(`token?😭 `, err.response.data.errMsg))
-    console.log("publicIssues", publicIssue )
+  function getAllIssues() {
+    userAxios
+      .get("/api/issue")
+      .then((res) => {
+        console.log("getAllIssues res:", res.data);
+        setPublicIssue(res.data);
+      })
+      .catch((err) => console.log(`token?😭 `, err.response.data.errMsg));
+    console.log("publicIssues", publicIssue);
   }
 
   function getUserIssues() {
-    userAxios.get("/api/issue/user")
+    userAxios
+      .get("/api/issue/user")
       .then((res) => {
-        // console.log("inside user Issues", res.data);
+        console.log("inside user Issues", res.data);
         setUserState((prevState) => ({
           ...prevState,
           issues: res.data,
@@ -107,7 +126,6 @@ export default function UserProvider(props) {
       );
   }
 
- 
   function addIssue(newIssue) {
     userAxios
       .post("/api/issue", newIssue)
@@ -118,62 +136,94 @@ export default function UserProvider(props) {
         }));
       })
       .catch((err) => console.log(err));
-    }
+  }
 
   // console.log('userState:', userState);
 
-  function upVote(issueId){
-    userAxios.put(`/api/issue/upvote/${issueId} `)
-    .then(res => {
-      setUserState(prevState => {
-        return {
-          ...prevState,
-          issues: prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)
-        }
+  function upVote(issueId) {
+    userAxios
+      .put(`/api/issue/upvote/${issueId} `)
+      .then((res) => {
+        setUserState((prevState) => {
+          return {
+            ...prevState,
+            issues: prevState.issues.map((issue) =>
+              issue._id !== issueId ? issue : res.data
+            ),
+          };
+        });
       })
-    })
-    .catch(err => console.log('upVote:', err))
+      .catch((err) => console.log("upVote:", err));
   }
 
-  function downVote(issueId){
-    userAxios.put(`/api/issue/downvote/${issueId} `)
-    .then(res => {
-      setUserState(prevState => {
-        return {
-          ...prevState,
-          issues: prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)
-        }
+  function downVote(issueId) {
+    userAxios
+      .put(`/api/issue/downvote/${issueId} `)
+      .then((res) => {
+        setUserState((prevState) => {
+          return {
+            ...prevState,
+            issues: prevState.issues.map((issue) =>
+              issue._id !== issueId ? issue : res.data
+            ),
+          };
+        });
       })
-    })
-    .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
 
-//  React.
- useEffect(() => {
-   getAllIssues()
- }, [publicIssue.length]);
- 
-//  React.useEffect(() => {
-//    getAllComments()
-//    // getIssueData();
-//  }, [comments.length]);
-  
+  useEffect(() => {
+    
+    getAllIssues();
+  }, []);
+
+  const [comments, setComments] = useState([]);
+
+  function getComment(){
+    userAxios
+      .get(`/api/comment`) //${issueId}
+      .then((response) => {
+        setComments(response.data);
+      })
+      .catch((error) => {
+        console.log("UserPovider Getcomment UseEffect😭", error);
+      });
+  }
+
+  function addComment (issueId, updates){
+    userAxios
+      .post(`/api/comment/${issueId}`, updates)
+      .then((response) => {
+        setComments(prevComments => [...prevComments, response.data])
+      })
+      .catch((error) => {
+        console.error("Error adding comment:", error);
+      });
+  }
+
+  //  React.useEffect(() => {
+  //    getAllComments()
+  //    // getIssueData();
+  //  }, [comments.length]); publicIssue.length in getAllIss
 
   return (
     <UserContext.Provider
       value={{
         ...userState,
         publicIssue,
+        userAxios,
         signup,
         login,
         logout,
         addIssue,
         getAllIssues,
+        addComment,
+        comments,
+        getComment,
         getUserIssues,
         resetAuthErr,
         upVote,
         downVote,
-        // getAllComments,
         errMsg: userState.errMsg,
       }}
     >

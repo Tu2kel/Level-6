@@ -20,7 +20,7 @@ export default function Profile(props) {
   
   // console.log("in Profile line 21", 'Name:', username, 'Issue:', issues);
   
-
+  console.log('Profile comp, issues:', issues)
   return (
     <div className="profile">
       <h1>Welcome {username}!</h1>

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../context/UserProvider";
+
 
 const CommentForm = ({ issueId }) => {
   const [comment, setComment] = useState("");
+  const {addComment} = useContext(UserContext)
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
@@ -10,16 +13,16 @@ const CommentForm = ({ issueId }) => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-
+    addComment(issueId, {text: comment })
     // Axios POST request to add a comment for the issue
-    axios
-      .post(`/api/comment/${issueId}`, { text: comment })
-      .then((response) => {
-        console.log("Comment added:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error adding comment:", error);
-      });
+    // userAxios
+    //   .post(`/api/comment/${issueId}`, { text: comment })
+    //   .then((response) => {
+    //     console.log("Comment added:", response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error adding comment:", error);
+    //   });
 
     // Clears the comment input field
     setComment("");

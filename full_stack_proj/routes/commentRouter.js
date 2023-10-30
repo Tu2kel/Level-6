@@ -31,8 +31,11 @@ commentRouter.post("/:issueId", (req, res, next) => {
 
 // Get issue by comment by issueId
 commentRouter.get("/:issueId", (req, res, next) => {
-  const issueId = req.params.issueId;
-
+  // const issueId = req.params.issueId;
+  const issueId = req.auth._id
+  // req.body.issue = req.params.issueId;
+  // req.body.createdBy = req.auth._id;
+  console.log('REQQQ', issueId)
     Promise.all([
     Issue.findOne({ _id: issueId }).exec(),
     Comment.find({ issue: issueId }).exec(),

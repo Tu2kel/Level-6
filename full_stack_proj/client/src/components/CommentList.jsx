@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../context/UserProvider";
 
 function CommentList({ issueId }) {
-  const [comments, setComments] = useState([]);
+  const { getComment, comments } =  useContext(UserContext)
 
   useEffect(() => {
-    // Get the JWT token from local storage
-    const token = localStorage.getItem("token");
-
-    // Configure Axios to include the token in the headers
-    const axiosInstance = axios.create({
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    axiosInstance
-      .get(`/api/comment/${issueId}`) // Assuming you want to fetch comments for a specific issue
-      .then((response) => {
-        setComments(response.data);
-      })
-      .catch((error) => {
-        console.log("CommentList UseEffect😭", error);
-      });
-  }, [issueId]);
-
+    getComment()
+  }, []);
+  console.log( "comments?:", comments); // ID does populate
+  const filteredComments = comments.filter(comment => comment.issue === issueId )
   return (
     <div>
       <h2>Comments</h2>
       {comments.length > 0 ? (
         <ul>
-          {comments.map((comment) => (
+          {filteredComments.map((comment) => (
             <li key={comment._id}>
               <p>{comment.text}</p>
             </li>
@@ -45,40 +30,4 @@ function CommentList({ issueId }) {
 
 export default CommentList;
 
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
 
-// function CommentList({ issueId }) {
-//   const [comments, setComments] = useState([]);
-
-//   useEffect(() => {
-//     axios
-//       .get(`/api/comment`) //${issueId}
-//       .then((response) => {
-//         setComments(response.data);
-//       })
-//       .catch((error) => {
-//         console.log("CommentList UseEffect😭", error);
-//       });
-//   }, [issueId]);
-//   // console.log( "issueID?:", issueId);
-
-//   return (
-//     <div>
-//       <h2>Comments</h2>
-//       {comments.length > 0 ? (
-//         <ul>
-//           {comments.map((comment) => (
-//             <li key={comment._id}>
-//               <p>{comment.text}</p>
-//             </li>
-//           ))}
-//         </ul>
-//       ) : (
-//         <p>No comments yet.</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default CommentList;
