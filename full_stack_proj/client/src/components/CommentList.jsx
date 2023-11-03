@@ -12,7 +12,7 @@ function CommentList({ issueId }) {
   const filteredComments = comments.filter(comment => comment.issue === issueId )
   return (
     <div>
-      <h2>Comments</h2>
+      <h2>Comments Here</h2>
       {comments.length > 0 ? (
         <ul>
           {filteredComments.map((comment) => (
@@ -22,7 +22,7 @@ function CommentList({ issueId }) {
           ))}
         </ul>
       ) : (
-        <p>No comments yet.</p>
+        <p>No One has Commentted</p>
       )}
     </div>
   );

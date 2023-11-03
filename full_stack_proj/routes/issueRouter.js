@@ -115,7 +115,7 @@ issueRouter.put('/upvote/:issueId', async (req, res, next) => {
       {new: true} //returns newest version
     );
     return res.status(200).send(updatedIssue);
-  }catch(err) {
+  } catch(err) {
     res.status(500)
     return next(err)
   }

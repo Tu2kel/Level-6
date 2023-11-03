@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
-import CommentList from "../components/CommentList";
-CommentList
+// import CommentList from "../components/CommentList";
+
 
 export const UserContext = React.createContext();
 
@@ -25,22 +25,7 @@ export default function UserProvider(props) {
   const [userState, setUserState] = useState(initState);
   const [publicIssue, setPublicIssue] = useState([]);
 
-  // const [comments, setComments] = useState([]);
-  // const { userAxios } = useContext(UserContext);
-
-  // useEffect(() => {
-  //   getAllIssues();
-
-  //   userAxios
-  //     .get(`/api/comment/${issueId}`) // Assuming you want to fetch comments for a specific issue
-  //     .then((response) => {
-  //       setComments(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("CommentList UseEffect😭", error);
-  //     });
-      
-  // }, []);
+  
 
   function signup(credentials) {
     axios
@@ -104,18 +89,18 @@ export default function UserProvider(props) {
     userAxios
       .get("/api/issue")
       .then((res) => {
-        console.log("getAllIssues res:", res.data);
+        // console.log("getAllIssues res:", res.data);
         setPublicIssue(res.data);
       })
       .catch((err) => console.log(`token?😭 `, err.response.data.errMsg));
-    console.log("publicIssues", publicIssue);
+    // console.log("publicIssues", publicIssue);
   }
 
   function getUserIssues() {
     userAxios
       .get("/api/issue/user")
       .then((res) => {
-        console.log("inside user Issues", res.data);
+        // console.log("inside user Issues", res.data);
         setUserState((prevState) => ({
           ...prevState,
           issues: res.data,
@@ -152,6 +137,7 @@ export default function UserProvider(props) {
             ),
           };
         });
+        setPublicIssue(prevIssues => prevIssues.map( issue => issueId !== issue._id ? issue : res.data) )
       })
       .catch((err) => console.log("upVote:", err));
   }
@@ -168,12 +154,14 @@ export default function UserProvider(props) {
             ),
           };
         });
+        setPublicIssue((prevIssues) =>
+          prevIssues.map((issue) => (issueId !== issue._id ? issue : res.data))
+        );
       })
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    
     getAllIssues();
   }, []);
 
@@ -201,10 +189,7 @@ export default function UserProvider(props) {
       });
   }
 
-  //  React.useEffect(() => {
-  //    getAllComments()
-  //    // getIssueData();
-  //  }, [comments.length]); publicIssue.length in getAllIss
+  
 
   return (
     <UserContext.Provider

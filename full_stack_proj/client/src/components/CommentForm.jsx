@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import { UserContext } from "../context/UserProvider";
+import Public from "./Public";
 
 
-const CommentForm = ({ issueId }) => {
+export default function CommentForm ({ issueId }) {
   const [comment, setComment] = useState("");
   const {addComment} = useContext(UserContext)
 
-  const handleCommentChange = (e) => {
+  function handleCommentChange(e){
     setComment(e.target.value);
   };
 
-  const handleCommentSubmit = (e) => {
+  function handleCommentSubmit(e){
     e.preventDefault();
     addComment(issueId, {text: comment })
     // Axios POST request to add a comment for the issue
@@ -43,4 +43,3 @@ const CommentForm = ({ issueId }) => {
   );
 };
 
-export default CommentForm;

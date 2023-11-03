@@ -37,17 +37,12 @@ export default function Issue(props) {
               {/* <p> {downvotes.length} </p> */}
 
       {/* <button onClick={() => props.deleteIssue(_id)}>Delete</button> */}
+      
     </div>
-  );
 
-  {
-    /* <div>
-        <h4>Comments:</h4>
-        <ul>
-          {comment.map((comments, index) => (
-            <li key={index}>{comments}</li>
-          ))}
-        </ul>
-      </div> */
-  }
+
+
+
+  )
+
 }
