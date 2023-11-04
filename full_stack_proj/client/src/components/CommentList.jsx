@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { UserContext } from "../context/UserProvider";
 
 function CommentList({ issueId }) {
@@ -8,11 +7,13 @@ function CommentList({ issueId }) {
   useEffect(() => {
     getComment()
   }, []);
-  console.log( "comments?:", comments); // ID does populate
+  // console.log( "comments?:", comments); 
   const filteredComments = comments.filter(comment => comment.issue === issueId )
   return (
     <div>
       <h2>Comments Here</h2>
+      <br />
+      <br />
       {comments.length > 0 ? (
         <ul>
           {filteredComments.map((comment) => (
@@ -22,7 +23,7 @@ function CommentList({ issueId }) {
           ))}
         </ul>
       ) : (
-        <p>No One has Commentted</p>
+        <p>No One has Commented</p>
       )}
     </div>
   );

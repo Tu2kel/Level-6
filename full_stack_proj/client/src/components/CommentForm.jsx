@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
-import Public from "./Public";
 
 
 export default function CommentForm ({ issueId }) {
@@ -14,17 +13,7 @@ export default function CommentForm ({ issueId }) {
   function handleCommentSubmit(e){
     e.preventDefault();
     addComment(issueId, {text: comment })
-    // Axios POST request to add a comment for the issue
-    // userAxios
-    //   .post(`/api/comment/${issueId}`, { text: comment })
-    //   .then((response) => {
-    //     console.log("Comment added:", response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error adding comment:", error);
-    //   });
-
-    // Clears the comment input field
+    
     setComment("");
   };
 
@@ -35,7 +24,7 @@ export default function CommentForm ({ issueId }) {
           name="comment"
           value={comment}
           onChange={handleCommentChange}
-          placeholder="Leave a comment..."
+          placeholder="Leave a Comment..."
         ></textarea>
         <button type="submit">Submit Comment</button>
       </form>

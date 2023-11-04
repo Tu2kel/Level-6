@@ -10,6 +10,7 @@
 
 .app {
   background-color: #eee9;
+  height: 600vh;
 }
 
 .navbar {
@@ -62,18 +63,22 @@
 .issue_list{
   display: flex;
   flex-direction: column;
-  border: 1px solid red ;
+  /* border: 1px solid red ; */
   height: 200vh;
   width: 100%;
+  margin-top: -200px;
+  padding-left: 50px;
 }
 
 .issue_info{
   display: flex;
   flex-direction: column;
-  border: 1px solid red ;
+  /* border: 1px solid red ; */
   height: 50vh;
   width: 100%;
+  margin-top: 300px;
 }
+
 
 .public {
   height: 100vh;
@@ -113,8 +118,63 @@
   left: 20px;
 }
 
+.voteBtnUp{
+  background-color: black;
+  top: 25px;
+}
+
 .voteBtnDown{
   position: relative;
   left: 120px;
   bottom: 25px;
+  background-color: rebeccapurple;
+
+}
+
+#upvoting{
+  position: relative;
+  left: 45px;
+  top: 40px;
+  color: rebeccapurple;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+#downvoting{
+  position: relative;
+  left: 145px;
+  bottom: 6px;
+  font-weight: bolder;
+  font-size: 20px;
+  color: rebeccapurple;
+
+}
+.edit{
+  width: 50px;
+  background-color: black;
+  color: rebeccapurple;
+  position: relative;
+  left: 25px;
+}
+
+.delete{
+  width: 50px;
+  background-color: rebeccapurple;
+  color: black;
+  position: relative;
+  left: 125px;
+  bottom: 40px;
+  
+}
+
+.edit, .delete{
+  margin-top: 20px;
+}
+
+button{
+  cursor: pointer;
+}
+
+li{
+  list-style-type: none;
 }
