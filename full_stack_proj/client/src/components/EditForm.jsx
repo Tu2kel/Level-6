@@ -3,23 +3,24 @@ import React, { useState } from "react";
 export default function EditForm({ issueData, save, handleCommentChange }) {
   
   const [editedIssue, setEditedIssue] = useState({
-    title:        issueData.title,
-    description:  issueData.description,
-    imgUrl:       issueData.imgUrl,
-    comment:      issueData.comment,
+    //initial state of the editedIssue is set to the original issue data
+    title:          issueData.title,
+    description:    issueData.description,
+    imgUrl:         issueData.imgUrl,
+    comment:        issueData.comment,
   });
 
   function handleChange(e) {
     const { name, value } = e.target;
     setEditedIssue((prevIssue) => ({
       ...prevIssue,
-      [name]: value,
+      [name]: value, //sets a new property on the new state
     }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    save(editedIssue);
+    save(editedIssue); // saves new value/ state
   }
 
   return (

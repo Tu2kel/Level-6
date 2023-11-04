@@ -6,32 +6,33 @@ import EditForm from "./EditForm";
 
 export default function Issue(props) {
   const { title, description, imgUrl, _id, upvotes, downvotes, issueData } =
-    props;
+    props; // Destructured properties from the props
 
-  const { upVote, downVote, deleteIssue, editIssue } = useContext(UserContext);
+  const { upVote, downVote, deleteIssue, editIssue } = useContext(UserContext); // Access functions from the UserContext "Cookie Jar" using useContext
 
+  
   const [issueComments, setIssueComments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Function to handle the "Edit" button click
+  
   function handleEditClick() {
-    setIsEditing(true);
+    setIsEditing(true); // set to true
   }
 
-  // Function to handle the "Delete" button click
+  
   function handleDeleteClick() {
     if (window.confirm("Are you sure you want to delete this issue?")) {
-      // Call the deleteIssue function with the issue ID
-      deleteIssue(_id);
+      // Call the deleteIssue function from UserProvider with the issue ID
+      deleteIssue(_id); // 
     }
   }
 
-  // Function to handle saving the edited issue
+  
   function handleSaveClick(updatedIssue) {
     // Call the editIssue function with the issue ID and updated data
     editIssue(_id, updatedIssue);
     // Exit edit mode
-    setIsEditing(false);
+    setIsEditing(false); //collapses edit form back to normal
   }
 
   return (
@@ -40,6 +41,7 @@ export default function Issue(props) {
         // Render the edit form when isEditing is true
         <EditForm issueData={issueData} save={handleSaveClick} />
       ) : (
+        // Else render the issue details and comment section when `isEditing` is `false`
         <>
           <h1> {title} </h1>
           <h3> {description} </h3>
@@ -59,7 +61,7 @@ export default function Issue(props) {
           <button onClick={() => downVote(_id)} className="voteBtnDown">
             ⬇️ ⬇️
           </button>
-          <p id="downvoting" > {downvotes ? downvotes.length : 0} </p>
+          <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
 
           <button onClick={() => handleEditClick()} className="edit">
             Edit

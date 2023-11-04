@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 
-const initInputs = {
+const initInputs = { // initial inputs
   title: "",
   description: "",
   imgUrl: "",
 };
 
 export default function IssueForm(props) {
-  const [inputs, setInputs] = useState(initInputs);
-  const { addIssue } = props;
+  const [inputs, setInputs] = useState(initInputs);// set state initInput
+  const { addIssue } = props; // destructure from props
 
   function handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value } = e.target; //grabs name, value of changed input
     setInputs((prevInputs) => ({
       ...prevInputs,
-      [name]: value,
+      [name]: value, // update + sets new value
     }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    addIssue(inputs);
-    setInputs(initInputs);
+    addIssue(inputs); //adds new issue
+    setInputs(initInputs); // resets the state to original values
   }
 
-  const { title, description, imgUrl } = inputs;
+  const { title, description, imgUrl } = inputs; //destructured
 
-  return (
+  return ( //renders/returns the form
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -49,14 +49,7 @@ export default function IssueForm(props) {
         onChange={handleChange}
         placeholder="Image Url"
       />
-      {/* <input
-        type="text"
-        name="comment"
-        value={comment}
-        onChange={handleChange}
-        placeholder="Enter Comment"
-      ></input> */}
-
+      
       <button>Add Issue</button>
     </form>
   );
