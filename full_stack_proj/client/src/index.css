@@ -66,7 +66,7 @@
   /* border: 1px solid red ; */
   height: 200vh;
   width: 100%;
-  margin-top: -200px;
+  /* margin-top: -200px; */
   padding-left: 50px;
 }
 
@@ -97,10 +97,14 @@
   text-align: center;
 }
 
-.profile > h3 {
-  margin: 16px;
+.profile  {
+  margin-bottom: 16px;
   text-decoration: underline;
 }
+
+/* h3{
+  
+} */
 
 .profile > form {
   display: flex;
@@ -176,5 +180,10 @@ button{
 }
 
 li{
-  list-style-type: none;
+  /* list-style-type: none; */
+  list-style-type: decimal;
+}
+
+#join, #login{
+  cursor: pointer;
 }

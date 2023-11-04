@@ -3,27 +3,28 @@ import { UserContext } from "../context/UserProvider";
 
 
 export default function CommentForm ({ issueId }) {
-  const [comment, setComment] = useState("");
-  const {addComment} = useContext(UserContext)
+  //specific id
+  const [comment, setComment] = useState(""); // []the state of the comment text field set as empty string.
+  const { addComment } = useContext(UserContext); // from UserProviders USercontext Provider area
 
-  function handleCommentChange(e){
-    setComment(e.target.value);
-  };
+  function handleCommentChange(e) {
+    setComment(e.target.value); //updates the state of the comment text field to the new value
+  }
 
-  function handleCommentSubmit(e){
+  function handleCommentSubmit(e) {
     e.preventDefault();
-    addComment(issueId, {text: comment })
-    
+    addComment(issueId, { text: comment }); //called from Userprovider and fires adds new comment from the specific issueId
+
     setComment("");
-  };
+  }
 
   return (
     <div>
-      <form onSubmit={handleCommentSubmit}>
+      <form onSubmit={handleCommentSubmit}> {/* click fires function to set new value */}
         <textarea
           name="comment"
           value={comment}
-          onChange={handleCommentChange}
+          onChange={handleCommentChange} /* click fires function  adds updated comment*/
           placeholder="Leave a Comment..."
         ></textarea>
         <button type="submit">Submit Comment</button>

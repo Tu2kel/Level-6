@@ -220,25 +220,25 @@ function deleteIssue(issueId) {
 
   return (
     <UserContext.Provider
-      value={{
+      value={{ // sends it to area called upon thru UserContext
         ...userState,
         publicIssue,
         userAxios,
+        comments,
+        errMsg: userState.errMsg,
         signup,
         login,
         logout,
         addIssue,
         getAllIssues,
         addComment,
-        comments,
         getComment,
         getUserIssues,
         resetAuthErr,
         upVote,
         downVote,
-        errMsg: userState.errMsg,
         deleteIssue,
-        editIssue,
+        editIssue
       }}
     >
       {props.children}

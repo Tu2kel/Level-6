@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import CommentForm from "./CommentForm";
 
 export default function EditForm({ issueData, save, handleCommentChange }) {
+  
   const [editedIssue, setEditedIssue] = useState({
     title:        issueData.title,
     description:  issueData.description,
@@ -50,7 +50,6 @@ export default function EditForm({ issueData, save, handleCommentChange }) {
         placeholder="Leave a Comment..."
       ></textarea>
 
-      {/* <CommentForm /> */}
       <button type="submit">Save</button>
     </form>
   );

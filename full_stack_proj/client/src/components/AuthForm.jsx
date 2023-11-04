@@ -2,20 +2,20 @@ import React from "react";
 
 export default function AuthForm(props) {
   const {
-    handleChange,
-    handleSubmit,
-    btnText,
-    errMsg,
-    inputs: { username, password },
+    handleChange, //value of an input field changes
+    handleSubmit, //when the form is submitted
+    btnText, 
+    errMsg, //displays upon err
+    inputs: { username, password }, // from Auth.jsx
   } = props;
 
-  return (
+  return ( //returns a form
     <form onSubmit={handleSubmit}>
       <input
         type="text"
         value={username}
         name="username"
-        onChange={handleChange}
+        onChange={handleChange} 
         placeholder="Username"
       />
       <input
