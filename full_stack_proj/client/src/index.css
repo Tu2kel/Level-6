@@ -187,3 +187,12 @@ li{
 #join, #login{
   cursor: pointer;
 }
+
+header{
+  display: flex;
+  justify-content: center;
+  color: rebeccapurple;
+  text-decoration: underline overline;
+  margin-top: 35px;
+
+}

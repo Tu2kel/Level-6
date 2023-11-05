@@ -6,14 +6,18 @@ export default function Public(props) {
   const { publicIssue, getAllIssues } = useContext(UserContext);
 
   useEffect( () => {
-    getAllIssues()
+    getAllIssues() // adding all issues on public page
   }, [])
 
   return (
     <div className="public">
-      <header> <strong> Public Issues Below </strong> </header>
+      <header>
+        {" "}
+        <strong> Public Issues Below </strong>{" "}
+      </header>
       <br />
-      <IssueList issues={publicIssue}/>
+      <IssueList issues={publicIssue} />{" "}
+      {/* render IssueList + pass the publicIssues  */}
     </div>
   );
 }
