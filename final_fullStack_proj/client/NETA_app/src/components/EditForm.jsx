@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 
-export default function EditForm({ issueData, save, handleCommentChange }) {
+export default function EditForm({ reviewData, save, handleCommentChange }) {
   
-  const [editedIssue, setEditedIssue] = useState({
-    //initial state of the editedIssue is set to the original issue data
-    title:          issueData.title,
-    description:    issueData.description,
-    imgUrl:         issueData.imgUrl,
-    comment:        issueData.comment,
+  const [editedReview, setEditedReview] = useState({
+    //initial state of the editedreview is set to the original review data
+    title:          reviewData.title,
+    description:    reviewData.description,
+    imgUrl:         reviewData.imgUrl,
+    comment:        reviewData.comment,
   });
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setEditedIssue((prevIssue) => ({
-      ...prevIssue,
+    setEditedReview((prevReview) => ({
+      ...prevReview,
       [name]: value, //sets a new property on the new state
     }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    save(editedIssue); // saves new value/ state
+    save(editedReview); // saves new value/ state
   }
 
   return (
@@ -28,25 +28,25 @@ export default function EditForm({ issueData, save, handleCommentChange }) {
       <input
         type="text"
         name="title"
-        value={editedIssue.title}
+        value={editedReview.title}
         onChange={handleChange}
       />
       <input
         type="text"
         name="description"
-        value={editedIssue.description}
+        value={editedReview.description}
         onChange={handleChange}
       />
       <input
         type="text"
         name="imgUrl"
-        value={editedIssue.imgUrl}
+        value={editedReview.imgUrl}
         onChange={handleChange}
       />
 
       <textarea
         name="comment"
-        value={editedIssue.comment}
+        value={editedReview.comment}
         onChange={handleCommentChange}
         placeholder="Leave a Comment..."
       ></textarea>

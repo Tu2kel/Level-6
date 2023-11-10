@@ -162,25 +162,15 @@ button {
   color: greenyellow;
 }
 
-/* .logout {
-  font-size: 18px;
-  color: #000000;
-  text-decoration: none;
-  
-  font-size: 21px;
-  text-decoration: underline overline;
-} */
-
-/* .logout:hover {
-  color: #dc0a0a;
-  cursor: pointer;
-} */
 
 .alerts {
   position: absolute;
-  top: 4%;
-  left: 40%;
   font-size: 16px;
+  top: 54%;
+  left: 58%;
+  z-index: 1;
+  text-decoration: underline;
+  font-size: 17px;
 }
 
 .youtube {
@@ -197,7 +187,7 @@ button {
 /*Home Css Below*/
 
 .createReviewForm {
-  /*⁡⁢⁢⁣IssueForm⁡*/
+  
 
   position: absolute;
   top: 60%;
@@ -239,37 +229,35 @@ button {
   left: 45%;
 }
 
-/* .issue_list {
-  display: flex;
-  
-  
-}
 
-.issue_info {
-  position: absolute;
-  font-size: 1em;
-  top: 90%;
-  border: 2px solid yellow;
-  padding-left: 20px;
-  flex-wrap: wrap;
-} */
 
-.issue_list {
+.review_list {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 800px;
 }
 
-.issue_info {
+.review_info {
   position: relative;
   flex-basis: 33%;
   padding: 10px;
-  border: 2px solid yellow;
+  border: 2px solid ;
+  border-radius: 5%;
+  /* background: linear-gradient(120deg, rgba(255, 0, 0, 0.7), rgba(23, 22, 22, 0.757), rgba(0, 0, 255, 0.835), rgba(23, 22, 22, 0.757)); */
+
+  background-image: url("https://giphy.com/embed/C3rY8TuHaLuyCkSuDS/video?autoplay=0&amp;mute=5&amp;volume=10%");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* background-image: url("https://media2.giphy.com/media/7JzHsh3UTip20/200w.gif?cid=6c09b952ejvddhjcdv3ue5296l9ggtcenlszieh5vffmz5pj&ep=v1_gifs_search&rid=200w.gif&ct=g");
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .list_title {
   font-size: 1.5em;
+  text-decoration: underline overline;
 }
 
 img:hover {
@@ -279,6 +267,14 @@ img:hover {
 li {
   list-style-type: bullets;
 }
+
+.vote_Container:hover{
+border: 2px solid red;
+/* padding: 10px;
+margin: auto;
+width: 70% */
+}
+
 
 .voteBtnUp {
   position: absolute;
@@ -308,14 +304,15 @@ li {
 
 .edit{
   position: absolute;
-  right: 164px;
-  bottom: 290px;
+  right: 147px;
+  bottom: 300px;
+  width: 9%;
 }
 
 .delete{
   position: absolute;
   right: 147px;
-  bottom: 250px;
+  bottom: 260px;
 }
 
 
@@ -341,7 +338,7 @@ li {
   margin-bottom: 50px;
 } */
 
-/* Profile*/
+/* Reviews*/
 .review_List_para{
   position: relative;
   top: 80vh;
@@ -351,3 +348,12 @@ li {
   text-align: center;
   text-decoration: underline overline;
 }
+
+textarea{
+  width: 200px;
+}
+
+.description{
+  padding-bottom: 10px;
+}
+

@@ -7,10 +7,10 @@ export default function Navbar(props) {
   return (
     <div className="navbar">
       <div className="links_header">
-        <Link to="/profile" className="nav_link" target="_blank">
+        <Link to="/profile" className="nav_link" >
           Home{" "}
         </Link>
-        <Link to="/public" className="nav_link">
+        <Link to="/public" className="nav_link" >
           Reviews{" "}
         </Link>
         <h2 onClick={logout} className="nav_link">

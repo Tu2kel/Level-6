@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 
-function CommentList({ issueId }) {
-  //`issueId` prop as an argument / for specific Id
+function CommentList({ reviewId }) {
+  //`reviewId` prop as an argument / for specific Id
   const { getComment, comments } = useContext(UserContext); //grabs getComment and comments from the UserContext Provider section 
 
   useEffect(() => {
@@ -11,10 +11,11 @@ function CommentList({ issueId }) {
   }, []);
 
   const filteredComments = comments.filter( //saved filter to variable
-    (comment) => comment.issue === issueId
+    (comment) => comment.review === reviewId
   );
   return (
     <div>
+      <br />
       <h2 className="h2CommentHere" >Comments Here</h2>
       <br />
       <br />

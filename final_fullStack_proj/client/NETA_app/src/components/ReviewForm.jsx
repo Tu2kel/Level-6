@@ -6,9 +6,9 @@ const initInputs = { // initial inputs
   imgUrl: "",
 };
 
-export default function IssueForm(props) {
+export default function ReviewForm(props) {
   const [inputs, setInputs] = useState(initInputs);// set state initInput
-  const { addIssue } = props; // destructure from props
+  const { addReview } = props; // destructure from props
 
   function handleChange(e) {
     const { name, value } = e.target; //grabs name, value of changed input
@@ -20,14 +20,15 @@ export default function IssueForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    addIssue(inputs); //adds new issue
+    addReview(inputs); //adds new review
     setInputs(initInputs); // resets the state to original values
   }
 
+  
   const { title, description, imgUrl } = inputs; //destructured
 
   return ( //renders/returns the form
-    <form onSubmit={handleSubmit} className="createReviewForm" >
+    <form onSubmit={handleSubmit } className="createReviewForm" >
       <input
         type="text"
         name="title"
@@ -50,7 +51,7 @@ export default function IssueForm(props) {
         placeholder="Image Url"
       />
       
-      <button>Add Issue</button>
+      <button >Add Review</button>
     </form>
   );
 }

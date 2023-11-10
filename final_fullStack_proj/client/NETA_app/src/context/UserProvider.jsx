@@ -16,13 +16,13 @@ export default function UserProvider(props) {
   const initState = {
     user: JSON.parse(localStorage.getItem("user")) || {},
     token: localStorage.getItem("token") || "", //state will exist after refresh
-    issues: [],
+    reviews: [],
     errMsg: "",
   };
 
   const [userState, setUserState] = useState(initState);
 
-  const [publicIssue, setPublicIssue] = useState([]);
+  const [publicReview, setPublicReview] = useState([]);
 
   function signup(credentials) {
     axios
@@ -51,7 +51,7 @@ export default function UserProvider(props) {
 
         localStorage.setItem("user", JSON.stringify(user));
 
-        getUserIssues(); // Get the user's issues from the backend
+        getUserReviews(); // Get the user's reviews from the backend
 
         setUserState((prevUserState) => ({
           // Update the user state with the new user and token
@@ -73,7 +73,7 @@ export default function UserProvider(props) {
       // Update the user state to the initial state
       user: {},
       token: "",
-      issues: [],
+      reviews: [],
     });
   }
 
@@ -93,43 +93,43 @@ export default function UserProvider(props) {
     }));
   }
 
-  function getAllIssues() {
-    // Make a request to the backend to get all issues
+  function getAllReviews() {
+    // Make a request to the backend to get all reviews
     userAxios
-      .get("/api/issue")
+      .get("/api/review")
       .then((res) => {
-        // Set the publicIssue state variable to the response data
-        setPublicIssue(res.data);
+        // Set the publicReview state variable to the response data
+        setPublicReview(res.data);
       })
       .catch((err) => console.log(`token?😭 `, err.response.data.errMsg));
-    // console.log("publicIssues", publicIssue);
+    // console.log("publicReviews", publicReview);
   }
 
-  function getUserIssues() {
-    // Make a request to the backend to get the user's issues
+  function getUserReviews() {
+    // Make a request to the backend to get the user's reviews
     userAxios
-      .get("/api/issue/user")
+      .get("/api/review/user")
       .then((res) => {
-        // Update the user state with the user's issues
+        // Update the user state with the user's reviews
         setUserState((prevState) => ({
           ...prevState,
-          issues: res.data,
+          reviews: res.data,
         }));
       })
       .catch((err) =>
-        console.log("inside getuserIssue😭", err.response.data.errMsg)
+        console.log("inside getuserreview😭", err.response.data.errMsg)
       );
   }
 
-  function addIssue(newIssue) {
-    // Make a request to the backend to add a new issue
+  function addReview(newReview) {
+    // Make a request to the backend to add a new review
     userAxios
-      .post("/api/issue", newIssue)
+      .post("/api/review", newReview)
       .then((res) => {
-        // Add the new issue to the user state
+        // Add the new review to the user state
         setUserState((prevState) => ({
           ...prevState,
-          issues: [...prevState.issues, res.data],
+          reviews: [...prevState.reviews, res.data],
         }));
       })
       .catch((err) => console.log(err));
@@ -137,46 +137,46 @@ export default function UserProvider(props) {
 
   // console.log('userState:', userState);
 
-  function upVote(issueId) {
-    // Make a request to the backend to upvote an issue.
+  function upVote(reviewId) {
+    // Make a request to the backend to upvote an review.
     userAxios
-      .put(`/api/issue/upvote/${issueId} `)
+      .put(`/api/review/upvote/${reviewId} `)
       .then((res) => {
-        // Update the user state and public issues to reflect the upvote.
+        // Update the user state and public reviews to reflect the upvote.
         setUserState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.map((issue) =>
-            issue._id !== issueId ? issue : res.data
+          reviews: prevState.reviews.map((review) =>
+            review._id !== reviewId ? review : res.data
           ),
         }));
-        setPublicIssue((prevIssues) =>
-          prevIssues.map((issue) => (issueId !== issue._id ? issue : res.data))
+        setPublicReview((prevReviews) =>
+          prevReviews.map((review) => (reviewId !== review._id ? review : res.data))
         );
       })
       .catch((err) => console.log("upVote:", err));
   }
 
-  function downVote(issueId) {
-    // Make a request to the backend to downvote an issue.
+  function downVote(reviewId) {
+    // Make a request to the backend to downvote an review.
     userAxios
-      .put(`/api/issue/downvote/${issueId} `)
+      .put(`/api/review/downvote/${reviewId} `)
       .then((res) => {
-        // Update the user state and public issues to reflect the downvote.
+        // Update the user state and public reviews to reflect the downvote.
         setUserState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.map((issue) =>
-            issue._id !== issueId ? issue : res.data
+          reviews: prevState.reviews.map((review) =>
+            review._id !== reviewId ? review : res.data
           ),
         }));
-        setPublicIssue((prevIssues) =>
-          prevIssues.map((issue) => (issueId !== issue._id ? issue : res.data))
+        setPublicReview((prevReviews) =>
+          prevReviews.map((review) => (reviewId !== review._id ? review : res.data))
         );
       })
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    getAllIssues(); // Get all issues when the component mounts
+    getAllReviews(); // Get all reviews when the component mounts
   }, []);
 
   const [comments, setComments] = useState([]);
@@ -184,7 +184,7 @@ export default function UserProvider(props) {
   function getComment() {
     // Make a request to the backend to get all comments.
     userAxios
-      .get(`/api/comment`) //${issueId}
+      .get(`/api/comment`) //${reviewId}
       .then((response) => {
         // Set the comments state variable to the response data.
         setComments(response.data);
@@ -194,10 +194,10 @@ export default function UserProvider(props) {
       });
   }
 
-  function addComment(issueId, updates) {
-    // Make a request to the backend to add a new comment to an issue.
+  function addComment(reviewId, updates) {
+    // Make a request to the backend to add a new comment to an review.
     userAxios
-      .post(`/api/comment/${issueId}`, updates)
+      .post(`/api/comment/${reviewId}`, updates)
       .then((response) => {
         // Add the new comment to the comments state variable.
         setComments((prevComments) => [...prevComments, response.data]);
@@ -207,34 +207,36 @@ export default function UserProvider(props) {
       });
   }
 
-  function editIssue(issueId, updatedIssue) {
-    // Make a request to the backend to update an issue.
+  function editReview(reviewId, updatedReview) {
+    // Make a request to the backend to update an review.
     userAxios
-      .put(`/api/issue/${issueId}`, updatedIssue)
+      .put(`/api/review/${reviewId}`, updatedReview)
       .then((res) => {
-        // Update the issue in the user state.
+        // Update the review in the user state.
         setUserState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.map((issue) =>
-            issue._id === issueId ? res.data : issue
+          reviews: prevState.reviews.map((review) =>
+            review._id === reviewId ? res.data : review
           ),
         }));
       })
-      .catch((err) => console.log("editIssue:", err));
+      .catch((err) => console.log("editReview:", err));
   }
 
-  function deleteIssue(issueId) {
-    // Make a request to the backend to delete an issue.
+  function deleteReview(reviewId) {
+    // Make a request to the backend to delete an review.
     userAxios
-      .delete(`/api/issue/${issueId}`)
+      .delete(`/api/review/${reviewId}`)
       .then((res) => {
-        // Remove the issue from the user state.
+        // Remove the review from the user state.
         setUserState((prevState) => ({
           ...prevState,
-          issues: prevState.issues.filter((issue) => issue._id !== issueId),
+          reviews: prevState.reviews.filter(
+            (review) => review._id !== reviewId
+          ),
         }));
       })
-      .catch((err) => console.log("deleteIssue:", err));
+      .catch((err) => console.log("deleteReview:", err));
   }
 
   return (
@@ -242,23 +244,23 @@ export default function UserProvider(props) {
       value={{
         // be passed to all of the child components
         ...userState,
-        publicIssue,
+        publicReview,
         userAxios,
         comments,
         errMsg: userState.errMsg,
         signup,
         login,
         logout,
-        addIssue,
-        getAllIssues,
+        addReview,
+        getAllReviews,
         addComment,
         getComment,
-        getUserIssues,
+        getUserReviews,
         resetAuthErr,
         upVote,
         downVote,
-        deleteIssue,
-        editIssue,
+        deleteReview,
+        editReview,
       }}
     >
       {props.children}

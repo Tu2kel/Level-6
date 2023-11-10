@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserProvider";
-import IssueList from "./IssueList";
+import ReviewList from "./ReviewList";
 
 export default function Public(props) {
-  const { publicIssue, getAllIssues } = useContext(UserContext);
+  const { publicReview, getAllReviews } = useContext(UserContext);
 
   useEffect( () => {
-    getAllIssues() // adding all issues on public page
+    getAllReviews() // adding all reviews on public page
   }, [])
 
   return (
@@ -16,8 +16,8 @@ export default function Public(props) {
         <strong> Public Reviews Section </strong>{" "}
       </header>
       <br />
-      <IssueList issues={publicIssue} />{" "}
-      {/* render IssueList + pass the publicIssues  */}
+      <ReviewList reviews={publicReview} />{" "}
+      {/* render ReviewList + pass the publicReviews  */}
     </div>
   );
 }
