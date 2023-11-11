@@ -9,14 +9,14 @@ html {
   width: 100%;
 }
 
-body {
+/* body {
   background-color: rebeccapurple;
-}
+} */
 
-html,
+/* html,
 .create_Review_Container {
   background-color: rebeccapurple;
-}
+} */
 
 .app {
   background-color: rgb(5, 0, 10);
@@ -67,12 +67,13 @@ html,
 
 .sign_Back_In {
   position: relative;
+  text-align: center;
   top: 15em;
   font-weight: bolder;
   font-size: 25px;
   color: rebeccapurple;
   text-decoration: underline;
-  text-decoration-color: rebeccapurple;
+  /* text-decoration-color: rebeccapurple; */
 }
 
 #join {
@@ -120,14 +121,6 @@ input {
   font-size: 15px;
 }
 
-button {
-  background-color: black;
-  color: rebeccapurple;
-  border: 2px solid rebeccapurple;
-  font-size: 15px;
-  cursor: pointer;
-}
-
 .links_header {
   display: flex;
   align-items: center;
@@ -162,7 +155,6 @@ button {
   color: greenyellow;
 }
 
-
 .alerts {
   position: absolute;
   font-size: 16px;
@@ -182,17 +174,14 @@ button {
   z-index: -1;
 }
 
-
-
 /*Home Css Below*/
 
 .createReviewForm {
-  
-
   position: absolute;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
 }
 
 .createReviewForm input {
@@ -201,8 +190,10 @@ button {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: rebeccapurple;
-  color: black;
+  /* background-color: rebeccapurple; */
+  /* color: black; */
+  --color: hsl(270, 50%, 90%);
+  background: var(--color);
 }
 
 .createReviewForm button {
@@ -222,65 +213,105 @@ button {
   text-align: center;
 }
 
+.rev_List_para_grid {
+  display: grid;
+  justify-items: center;
+}
+
 .review_List_para {
   position: absolute;
   font-size: 2em;
   top: 80%;
-  left: 45%;
 }
-
-
 
 .review_list {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 800px;
 }
 
-.review_info {
-  position: relative;
-  flex-basis: 33%;
-  padding: 10px;
-  border: 2px solid ;
-  border-radius: 5%;
-  /* background: linear-gradient(120deg, rgba(255, 0, 0, 0.7), rgba(23, 22, 22, 0.757), rgba(0, 0, 255, 0.835), rgba(23, 22, 22, 0.757)); */
+/* .unOrdered_list {
+  break-after: always;
+} */
 
-  background-image: url("https://giphy.com/embed/C3rY8TuHaLuyCkSuDS/video?autoplay=0&amp;mute=5&amp;volume=10%");
-  background-repeat: no-repeat;
-  background-size: cover;
+li {
+  list-style-type: none;
+}
 
-  /* background-image: url("https://media2.giphy.com/media/7JzHsh3UTip20/200w.gif?cid=6c09b952ejvddhjcdv3ue5296l9ggtcenlszieh5vffmz5pj&ep=v1_gifs_search&rid=200w.gif&ct=g");
-  background-repeat: no-repeat;
-  background-size: cover; */
+/*----------CARDS-------------*/
+.card_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.card {
+  --padding: 1rem;
+  background-color: white;
+  border: 2px solid #777;
+  border-radius: 0.25rem;
+  /* overflow: hidden; */
 }
 
 .list_title {
-  font-size: 1.5em;
-  text-decoration: underline overline;
+  word-break: break-all;
+  max-width: 200px;
+  font-size: 1.3em;
+  text-decoration: underline;
+  text-decoration-color: rebeccapurple;
 }
 
-img:hover {
-  border: 2px solid yellow;
+.card_body {
+  padding: 0 var(--padding);
+  font-size: 1rem;
+  word-break: normal;
+  max-width: 200px;
 }
 
-li {
-  list-style-type: bullets;
+.card_shadow {
+  border: none;
+  box-shadow: 0 2px 15px 0 rgb(0, 0, 0, 0.2);
+  justify-self: center;
+  --color: hsl(270, 50%, 65%);
+  background: var(--color);
 }
 
-.vote_Container:hover{
-border: 2px solid red;
-/* padding: 10px;
-margin: auto;
-width: 70% */
+.card_img {
+  display: block;
+  width: 200px;
+  overflow: hidden;
+  max-height: 200px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  padding-bottom: 0;
+  transition: 200ms transform ease-in-out;
 }
 
+.card_img:hover {
+  transform: scale(1.025);
+}
 
+.editInputForm > input {
+  display: flex;
+  --color: hsl(270, 50%, 65%);
+  background: var(--color);
+  color: black;
+}
+
+/* 
+ 
+.Comment{
+  background-color: black;
+}
 .voteBtnUp {
   position: absolute;
-  left: 220px;
+  left: 210px;
   bottom: 300px;
-  /* float: left; */
+   float: left; 
 }
 
 #upvoting{
@@ -291,7 +322,7 @@ width: 70% */
 
 .voteBtnDown{
   position: absolute;
-  left: 220px;
+  left: 210px;
   bottom: 260px;
 }
 
@@ -302,58 +333,51 @@ width: 70% */
 
 }
 
-.edit{
-  position: absolute;
-  right: 147px;
-  bottom: 300px;
-  width: 9%;
+/**/
+.card_footer {
+  margin-top: 1rem;
+  padding-top: 0;
 }
 
-.delete{
-  position: absolute;
-  right: 147px;
-  bottom: 260px;
+.btn {
+  --color: hsl(270, 50%, 40%);
+  background: var(--color);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5em 0.75em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  margin-left: 2em;
 }
 
+.btn:hover,
+.btn:focus {
+  background: hsl(300, 50%, 60%);
+}
+
+.btn.btn-outline {
+  background: none;
+  border: 1px solid var(--color);
+  color: var(--color);
+}
+
+.btn.btn-outline:hover,
+.btn.btn-outline:focus {
+  background-color: hsl(270, 50%, 10%);
+}
+
+.btn + .btn {
+  margin-left: 0.5rem;
+  margin-bottom: 0.07rem;
+}
+
+.h2CommentHere {
+  font-size: 1.2em;
+}
 
 @media (max-width: 768px) {
   .collapse_navbar {
     display: none;
   }
 }
-
-/* Public Review Section*/
-
-.review_page {
-  position: relative;
-  top: 20vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3em;
-  text-align: center;
-  margin-bottom: -550px;
-}
-
-/* .public{
-  margin-bottom: 50px;
-} */
-
-/* Reviews*/
-.review_List_para{
-  position: relative;
-  top: 80vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  text-align: center;
-  text-decoration: underline overline;
-}
-
-textarea{
-  width: 200px;
-}
-
-.description{
-  padding-bottom: 10px;
-}
-

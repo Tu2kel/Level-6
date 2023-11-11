@@ -14,7 +14,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  issues: [{ type: Schema.Types.ObjectId, ref: "Issue" }],
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 

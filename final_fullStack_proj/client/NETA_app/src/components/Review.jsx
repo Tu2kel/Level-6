@@ -4,9 +4,12 @@ import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import EditForm from "./EditForm";
 
+
+
+
 //Child
 
-export default function foundReview(props) {
+export default function Review(props) {
   const { title, description, imgUrl, _id, upvotes, downvotes, reviewData } =
     props; // Destructured properties from the props
 
@@ -39,45 +42,63 @@ export default function foundReview(props) {
   }
 
   return (
-    <div className="review_info"  >
-      
+    <div className="review_info">
       {isEditing ? (
         // Render the edit form when isEditing is true
         <EditForm reviewData={reviewData} save={handleSaveClick} />
       ) : (
         // Else render the review details and comment section when `isEditing` is `false`
-        <>
-          <h1 className="list_title"> {title} </h1>
-          <br />
-          <h3 className="description"> {description} </h3>
-          <img src={imgUrl} alt={imgUrl} width={200} />
+        <div className="card_grid">
+          <div className="card_shadow">
+            <img className="card_img" src={imgUrl} alt={imgUrl}  />
 
-          <CommentForm reviewId={reviewData._id} />
-          <CommentList
-            reviewId={reviewData._id}
-            setReviewComments={setReviewComments}
-          />
-        <div className="vote_Container" >
-          <button onClick={() => upVote(_id)} className="voteBtnUp">
-            ⬆️ ⬆️
-          </button>
-          <p id="upvoting"> {upvotes ? upvotes.length : 0} </p>
+            <h1 title="Title" className="list_title">
+              {" "}
+              {title}{" "}
+            </h1>
+            <br />
+            <h3 title="Comment" className="card_body">
+              {" "}
+              {description}{" "}
+            </h3>
 
-          <button onClick={() => downVote(_id)} className="voteBtnDown">
-            ⬇️ ⬇️
-          </button>
-          <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
+            <CommentForm reviewId={reviewData._id} />
+            <CommentList
+              reviewId={reviewData._id}
+              setReviewComments={setReviewComments}
+            />
+            <button
+              title="Like"
+              onClick={() => upVote(_id)}
+              className="voteBtnUp"
+            >
+              👍🏽
+            </button>
+            <p id="upvoting"> {upvotes ? upvotes.length : 0} </p>
+
+            <button
+              title="Dislike"
+              onClick={() => downVote(_id)}
+              className="voteBtnDown"
+            >
+              👎🏽
+            </button>
+            <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
+
+            <div className="card_footer">
+              <button onClick={() => handleEditClick()} className="edit btn">
+                Edit
+              </button>
+
+              <button
+                onClick={() => handleDeleteClick()}
+                className="delete btn btn-outline "
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
-
-          <button onClick={() => handleEditClick()} className="edit">
-            Edit
-          </button>
-
-          <button onClick={() => handleDeleteClick()} className="delete">
-            Delete
-          </button>
-       
-        </>
       )}
     </div>
   );

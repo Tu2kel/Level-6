@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 
 
-export default function CommentForm ({ reviewId }) {
+export default function CommentForm({ reviewId }) {
   //specific id
   const [comment, setComment] = useState(""); // []the state of the comment text field set as empty string.
   const { addComment } = useContext(UserContext); // from UserProviders USercontext Provider area
@@ -20,20 +20,23 @@ export default function CommentForm ({ reviewId }) {
   }
   
   
-
+/*{handleCommentSubmit}> { click fires function to set new value }*/
+/*{handleCommentChange}  click fires function  adds updated comment*/
 
   return (
    
     <div>
-      <form onSubmit={handleCommentSubmit}> {/* click fires function to set new value */}
+
+      <form onSubmit={handleCommentSubmit}> 
         <textarea 
           name="comment"
           value={comment}
-          onChange={handleCommentChange} /* click fires function  adds updated comment*/
+          onChange={handleCommentChange} 
           placeholder="Leave a Comment..."
         ></textarea>
-        <button  type="submit">Comment</button>
+        <button title="Comment" className="Comment" type="submit">🗣️</button>
       </form>
+
     </div>
   );
 };

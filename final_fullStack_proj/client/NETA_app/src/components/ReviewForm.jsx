@@ -41,7 +41,7 @@ export default function ReviewForm(props) {
         name="description"
         value={description}
         onChange={handleChange}
-        placeholder="Description"
+        placeholder="Place Comment Here"
       />
       <input
         type="text"

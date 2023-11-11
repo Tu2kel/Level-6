@@ -11,9 +11,9 @@ const commentSchema = new Schema({
     ref: 'User', // User model for storing user information
     required: true,
   },
-  issue: {
+  review: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Issue', // Reference to the Issue model
+    ref: 'Review', // Reference to the Issue model
     required: true,
   },
   createdAt: {

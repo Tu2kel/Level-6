@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const issueSchema = new Schema({
+const reviewSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -22,13 +22,13 @@ const issueSchema = new Schema({
   upvotes: [
     {
       type: Schema.Types.ObjectId,
-      ref: "User", // Reference to users who upvoted this issue
+      ref: "User", // Reference to users who upvoted this review
     },
   ],
   downvotes: [
     {
       type: Schema.Types.ObjectId,
-      ref: "User", // Reference to users who downvoted this issue
+      ref: "User", // Reference to users who downvoted this review
     },
   ],
   createdAt: {
@@ -37,4 +37,4 @@ const issueSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Issue", issueSchema);
+module.exports = mongoose.model("Review", reviewSchema);

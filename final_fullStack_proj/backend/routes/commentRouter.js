@@ -1,7 +1,7 @@
 const express = require("express");
 const commentRouter = express.Router();
 const Comment = require("../models/comment");
-const Issue = require("../models/issue");
+const Review = require("../models/review");
 
 // ✅Get all comments
 commentRouter.get("/", (req, res, next) => {
@@ -14,9 +14,9 @@ commentRouter.get("/", (req, res, next) => {
   });
 });
 
-//✅Create a new comment on a political issue (requires authentication)
-commentRouter.post("/:issueId", (req, res, next) => {
-  req.body.issue = req.params.issueId;
+//✅Create a new comment on a political review (requires authentication)
+commentRouter.post("/:reviewId", (req, res, next) => {
+  req.body.review = req.params.reviewId;
   req.body.createdBy = req.auth._id;
   const newComment = new Comment(req.body);
 
@@ -29,30 +29,30 @@ commentRouter.post("/:issueId", (req, res, next) => {
   });
 });
 
-// Get issue by comment by issueId
-commentRouter.get("/:issueId", (req, res, next) => {
-  // const issueId = req.params.issueId;
-  const issueId = req.auth._id
-  // req.body.issue = req.params.issueId;
+// Get review by comment by reviewId
+commentRouter.get("/:reviewId", (req, res, next) => {
+  // const reviewId = req.params.reviewId;
+  const reviewId = req.auth._id
+  // req.body.review = req.params.reviewId;
   // req.body.createdBy = req.auth._id;
-  console.log('REQQQ', issueId)
+  console.log('REQ', reviewId)
     Promise.all([
-    Issue.findOne({ _id: issueId }).exec(),
-    Comment.find({ issue: issueId }).exec(),
-  ])
-    .then(([foundIssue, comments]) => {
-      if (!foundIssue) {
-        res.status(404).json({ message: "Issue not found" });
-      } else {
-        res.status(200).json({ issue: foundIssue, comments: comments });
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
+      Review.findOne({ _id: reviewId }).exec(),
+      Comment.find({ review: reviewId }).exec(),
+    ])
+      .then(([foundReview, comments]) => {
+        if (!foundReview) {
+          res.status(404).json({ message: "review not found" });
+        } else {
+          res.status(200).json({ review: foundReview, comments: comments });
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
 });
 
-//❌Delete a comment (requires authentication)
+//Deletes
 commentRouter.delete("/:commentId", (req, res, next) => {
   const commentId = req.params.commentId;
 

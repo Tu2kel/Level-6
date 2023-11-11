@@ -26,7 +26,7 @@ export default function AuthForm(props) {
         placeholder="Password"
       />
       <button>{btnText}</button>
-      <p style={{ color: "red" }}> { /*errMsg */} </p>
+      <p style={{ color: "red" }}> </p>
     </form>
   );
 }

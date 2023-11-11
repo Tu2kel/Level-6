@@ -24,7 +24,7 @@ export default function EditForm({ reviewData, save, handleCommentChange }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="editInputForm" onSubmit={handleSubmit}>
       <input
         type="text"
         name="title"
@@ -48,7 +48,7 @@ export default function EditForm({ reviewData, save, handleCommentChange }) {
         name="comment"
         value={editedReview.comment}
         onChange={handleCommentChange}
-        placeholder="Leave a Comment..."
+        placeholder="Edit a Comment..."
       ></textarea>
 
       <button type="submit">Save</button>

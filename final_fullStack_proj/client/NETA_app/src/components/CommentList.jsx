@@ -16,11 +16,11 @@ function CommentList({ reviewId }) {
   return (
     <div>
       <br />
-      <h2 className="h2CommentHere" >Comments Here</h2>
+      <h2 className="h2CommentHere" >View Comments Below</h2>
       <br />
       <br />
       {comments.length > 0 ? (// comments greater than 0 than
-        <ul>
+        <ul className="unOrdered_list">
           {filteredComments.map((comment) => ( // maps over filteredComments arr
             <li key={comment._id}> {/* renders the li for each comment */}
               <p>{comment.text}</p> {/* Comments displays */}

@@ -31,11 +31,6 @@ app.use("/auth", require("./routes/authRouter"));
 
 app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
 
-// ✅Routes for issues
-// app.use("/issue", require("./routes/issueRouter"));
-
-// ✅Routes for comments
-// app.use("/comment", require("./routes/commentRouter"));
 
 // Middleware for JWT authentication
 app.use(
@@ -43,8 +38,8 @@ app.use(
   expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
 );
 
-// Add routes for political issues, comments, and votes here
-app.use("/api/issue", require("./routes/issueRouter.js"));
+// Add routes for political reviews, comments, and votes here
+app.use("/api/review", require("./routes/reviewRouter.js"));
 app.use("/api/comment", require("./routes/commentRouter"));
 
 // Error Handler

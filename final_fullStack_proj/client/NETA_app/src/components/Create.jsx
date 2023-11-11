@@ -29,8 +29,9 @@ export default function Profile(props) {
       <ReviewForm addReview={addReview} />{" "}
 
       {/*renders the ReviewForm component and pass the addReview function as a prop*/}
-
+    <div className="rev_List_para_grid" >
       <h3 className="review_List_para" >Your Review(s) Posted Below</h3>
+    </div>
       <ReviewList reviews={reviews} />{" "}
 
       
