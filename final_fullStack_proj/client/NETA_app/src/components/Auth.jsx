@@ -41,15 +41,19 @@ export default function Auth() {
   return (
     <div className="navbar">
       <>
-        <p style={{ color: "red" }} className="alerts">
+      <div className="alerts">
+        <p /*style={{ color: "yellow" }}*/ >
           {errMsg}
         </p>{" "}
+      </div>
+
+
         {/* Might Delete */}
         {!toggle ? ( // Conditionally render the sign-up form if 'toggle' is false
           <>
             <div className="authHeader">
               <h1 className="neta">N E T A </h1>
-              <h2 className="authTitle"> Never Eating There Again </h2>
+              <h2 className="authTitle"> Never Eating There Again🤢</h2>
             </div>
             <AuthForm
               handleChange={handleChange} //

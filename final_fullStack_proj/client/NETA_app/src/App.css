@@ -9,9 +9,9 @@ html {
   width: 100%;
 }
 
-/* body {
-  background-color: rebeccapurple;
-} */
+body {
+  background: radial-gradient(darkorchid, transparent);
+}
 
 /* html,
 .create_Review_Container {
@@ -156,13 +156,15 @@ input {
 }
 
 .alerts {
-  position: absolute;
-  font-size: 16px;
-  top: 54%;
-  left: 58%;
+  position: relative;
+  font-size: 25px;
+  top: 15em;
+  text-align: center;
   z-index: 1;
-  text-decoration: underline;
-  font-size: 17px;
+  text-decoration: overline wavy;
+  letter-spacing: 2px ;
+  color: red;
+    
 }
 
 .youtube {
@@ -182,6 +184,7 @@ input {
   left: 50%;
   transform: translate(-50%, -50%);
   
+  
 }
 
 .createReviewForm input {
@@ -190,20 +193,29 @@ input {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* background-color: rebeccapurple; */
-  /* color: black; */
+ 
   --color: hsl(270, 50%, 90%);
   background: var(--color);
 }
+
 
 .createReviewForm button {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
-  background-color: rebeccapurple;
-  color: #fff;
+  --color: rebeccapurple;
+  background:hsl(270, 50%, 90%);
   border-radius: 5px;
 }
+
+.addRevBtn:hover, .addRevBtn:focus{
+ background: var(--color);
+}
+
+/* .addRevBtn{
+  background-color: rebeccapurple;
+  color: #fff;
+} */
 
 .h3_review {
   position: relative;
@@ -272,10 +284,12 @@ li {
 
 .card_shadow {
   border: none;
+  border-radius: 0.25em;
   box-shadow: 0 2px 15px 0 rgb(0, 0, 0, 0.2);
   justify-self: center;
   --color: hsl(270, 50%, 65%);
-  background: var(--color);
+  /* background: var(--color); */
+  background: hsl(270, 50%, 90%)
 }
 
 .card_img {
@@ -289,6 +303,7 @@ li {
   padding: 0;
   padding-bottom: 0;
   transition: 200ms transform ease-in-out;
+  border-radius: 0.25em;
 }
 
 .card_img:hover {
@@ -302,16 +317,13 @@ li {
   color: black;
 }
 
-/* 
- 
-.Comment{
-  background-color: black;
-}
-.voteBtnUp {
+/*
+ .voteBtnUp {
   position: absolute;
+  float: left; 
+  bottom: -200px;
+
   left: 210px;
-  bottom: 300px;
-   float: left; 
 }
 
 #upvoting{
@@ -331,9 +343,11 @@ li {
   left: 280px;
   bottom: 260px;
 
-}
+} */
 
-/**/
+
+
+
 .card_footer {
   margin-top: 1rem;
   padding-top: 0;
@@ -359,12 +373,13 @@ li {
 .btn.btn-outline {
   background: none;
   border: 1px solid var(--color);
-  color: var(--color);
+  
+  
 }
 
 .btn.btn-outline:hover,
 .btn.btn-outline:focus {
-  background-color: hsl(270, 50%, 10%);
+  background-color: hsl(0, 92%, 40%);
 }
 
 .btn + .btn {
@@ -374,6 +389,32 @@ li {
 
 .h2CommentHere {
   font-size: 1.2em;
+}
+
+.create_comment{
+background: hsla(300, 49%, 90%, 0.046);
+border-radius: 12%;
+border: none;
+cursor: pointer;
+margin-top: .5rem;
+}
+
+.create_comment:hover{
+background-color: rebeccapurple;
+}
+
+
+
+.review_page {
+  position: relative;
+  text-align: center;
+  top: 5em;
+  font-weight: bolder;
+  font-size: 32px;
+  color: rebeccapurple;
+  text-decoration: underline;
+  margin-bottom: -15em;
+  
 }
 
 @media (max-width: 768px) {

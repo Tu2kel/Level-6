@@ -51,7 +51,7 @@ export default function ReviewForm(props) {
         placeholder="Image Url"
       />
       
-      <button >Add Review</button>
+      <button className="addRevBtn" >Add Review</button>
     </form>
   );
 }

@@ -50,7 +50,7 @@ export default function Review(props) {
         // Else render the review details and comment section when `isEditing` is `false`
         <div className="card_grid">
           <div className="card_shadow">
-            <img className="card_img" src={imgUrl} alt={imgUrl}  />
+            <img className="card_img" src={imgUrl} alt={imgUrl} />
 
             <h1 title="Title" className="list_title">
               {" "}
@@ -67,23 +67,26 @@ export default function Review(props) {
               reviewId={reviewData._id}
               setReviewComments={setReviewComments}
             />
-            <button
-              title="Like"
-              onClick={() => upVote(_id)}
-              className="voteBtnUp"
-            >
-              👍🏽
-            </button>
-            <p id="upvoting"> {upvotes ? upvotes.length : 0} </p>
 
-            <button
-              title="Dislike"
-              onClick={() => downVote(_id)}
-              className="voteBtnDown"
-            >
-              👎🏽
-            </button>
-            <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
+            <div className="voting" >
+              <button
+                title="Like"
+                onClick={() => upVote(_id)}
+                className="voteBtnUp"
+              >
+                👍🏽
+              </button>
+              <p id="upvoting"> {upvotes ? upvotes.length : 0} </p>
+
+              <button
+                title="Dislike"
+                onClick={() => downVote(_id)}
+                className="voteBtnDown"
+              >
+                👎🏽
+              </button>
+              <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
+            </div>
 
             <div className="card_footer">
               <button onClick={() => handleEditClick()} className="edit btn">

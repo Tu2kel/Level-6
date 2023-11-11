@@ -7,37 +7,50 @@ export default function CommentForm({ reviewId }) {
   const [comment, setComment] = useState(""); // []the state of the comment text field set as empty string.
   const { addComment } = useContext(UserContext); // from UserProviders USercontext Provider area
 
+  const [isExpanded, setIsExpanded] = useState(false); // track textarea visibility
+
   function handleCommentChange(e) {
     setComment(e.target.value); //updates the state of the comment text field to the new value
   }
 
-  function handleCommentSubmit(e) {
+  function handleExpand() {
+    setIsExpanded(!isExpanded); // toggle textarea visibility
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
     addComment(reviewId, { text: comment }); //called from Userprovider and fires adds new comment from the specific reviewId
 
     setComment("");
-
   }
-  
-  
-/*{handleCommentSubmit}> { click fires function to set new value }*/
-/*{handleCommentChange}  click fires function  adds updated comment*/
+
+  /*{handleCommentSubmit}> { click fires function to set new value }*/
+  /*{handleCommentChange}  click fires function  adds updated comment*/
 
   return (
-   
+  
     <div>
+      <button
+        title="Add Comment!"
+        className="create_comment"
+        onClick={() => handleExpand()}
+      >
+        {isExpanded ? "close" : "🗣📢"}
+      </button>
 
-      <form onSubmit={handleCommentSubmit}> 
-        <textarea 
-          name="comment"
-          value={comment}
-          onChange={handleCommentChange} 
-          placeholder="Leave a Comment..."
-        ></textarea>
-        <button title="Comment" className="Comment" type="submit">🗣️</button>
-      </form>
+      {isExpanded && (
+        <form onSubmit={handleSubmit}>
+          <textarea value={comment} onChange={handleCommentChange} />
+          <button type="submit">Submit</button>
+        </form>
+      )}
 
+      
     </div>
+
+    
+            
+          
   );
 };
 
