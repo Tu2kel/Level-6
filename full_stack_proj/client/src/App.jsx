@@ -10,7 +10,7 @@ import { UserContext }  from "./context/UserProvider";
 export default function App() {
   const { token, logout } = useContext(UserContext)
   return (
-    <div className="app">
+    <>
       {token && <Navbar logout={logout} />}{" "}
       {/*if token true render Navbar with logout*/}
       <Routes>
@@ -37,6 +37,6 @@ export default function App() {
           }
         />
       </Routes>
-    </div>
+    </>
   );
 }

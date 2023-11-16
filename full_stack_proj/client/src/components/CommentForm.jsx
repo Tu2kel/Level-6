@@ -29,7 +29,8 @@ export default function CommentForm ({ issueId }) {
           placeholder="Leave a Comment..."
         ></textarea>
         <div class="btn-group btn-group-sm" type="submit" role="group" >...
-        <button className="btn btn-secondary" title="Submit Comment"> 🗣️📢</button>
+        <button className="btn btn-secondary" title="Submit Comment"> 🗣️📢
+        </button>
         </div>
       </form>
     </div>

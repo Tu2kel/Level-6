@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserProvider";
 import IssueList from "./IssueList";
 
-export default function Public(props) {
+export default function Public() {
   const { publicIssue, getAllIssues } = useContext(UserContext);
 
   useEffect( () => {
@@ -11,7 +11,7 @@ export default function Public(props) {
 
   return (
     <div className="public">
-      <header>
+      <header className="public_page">
         {" "}
         <strong> Public Issues Below </strong>{" "}
       </header>

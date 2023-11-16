@@ -26,8 +26,9 @@ export default function IssueForm(props) {
 
   const { title, description, imgUrl } = inputs; //destructured
 
-  return ( //renders/returns the form
-    <form onSubmit={handleSubmit}>
+  return (
+    //renders/returns the form
+    <form className="issueForm" onSubmit={handleSubmit}>
       <input
         type="text"
         name="title"
@@ -49,8 +50,8 @@ export default function IssueForm(props) {
         onChange={handleChange}
         placeholder="Image Url"
       />
-      
-      <button>Add Issue</button>
+
+      <button className="addIssueBtn">Add Issue</button>
     </form>
   );
 }
