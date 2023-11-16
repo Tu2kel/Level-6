@@ -3,6 +3,9 @@ import { UserContext } from "../context/UserProvider";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import EditForm from "./EditForm";
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+
 
 export default function Issue(props) {
   const { title, description, imgUrl, _id, upvotes, downvotes, issueData } =
@@ -35,41 +38,97 @@ export default function Issue(props) {
     setIsEditing(false); //collapses edit form back to normal
   }
 
+  // $(function () {
+  //   $(".example-popover").popover({
+  //     container: "body",
+  //   });
+  // });
+
+  var popoverTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="popover"]')
+  );
+  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+  });
+
   return (
-    <div className="issue_info">
+    <div className="issue_infos">
       {isEditing ? (
         // Render the edit form when isEditing is true
         <EditForm issueData={issueData} save={handleSaveClick} />
       ) : (
         // Else render the issue details and comment section when `isEditing` is `false`
+
         <>
-          <h1> {title} </h1>
-          <h3> {description} </h3>
-          <img src={imgUrl} alt={imgUrl} width={200} />
+         
 
-          <CommentForm issueId={issueData._id} />
-          <CommentList
-            issueId={issueData._id}
-            setIssueComments={setIssueComments}
-          />
+          <div className="card" style={{ width: "18rem" }}>
+            <img className="card-img-top" src={imgUrl} alt="profile"/>
+            <div className="card-body">
+              <h5 className="card-title">{title}</h5>
+              <p className="card-text">{description}</p>
 
-          <button onClick={() => upVote(_id)} className="voteBtnUp">
-            ⬆️ ⬆️
-          </button>
-          <p id="upvoting"> {upvotes ? upvotes.length : 0} </p>
+              <div
+                class="btn-group btn-group-sm"
+                role="group"
+                aria-label="Basic example"
+              >
+                <button
+                  onClick={() => upVote(_id)}
+                  type="button"
+                  class="btn btn-secondary"
+                  title="Like"
+                >
+                  {" "}
+                  {upvotes ? upvotes.length : 0}
+                  👍🏽
+                </button>
 
-          <button onClick={() => downVote(_id)} className="voteBtnDown">
-            ⬇️ ⬇️
-          </button>
-          <p id="downvoting"> {downvotes ? downvotes.length : 0} </p>
+                <button
+                  onClick={() => downVote(_id)}
+                  type="button"
+                  class="btn btn-secondary"
+                  title="DisLike"
 
-          <button onClick={() => handleEditClick()} className="edit">
-            Edit
-          </button>
+                >
+                  {" "}
+                  {downvotes ? downvotes.length : 0}
+                  👎🏽
+                </button>
+              </div>
 
-          <button onClick={() => handleDeleteClick()} className="delete">
-            Delete
-          </button>
+              <div className="leaveComment">
+                <CommentForm issueId={issueData._id} />
+                <CommentList
+                  issueId={issueData._id}
+                  setIssueComments={setIssueComments}
+                />
+              </div>
+
+             <div
+                className=""
+                class="btn-group"
+                role="group"
+                aria-label="Basic example"
+              >
+                <button
+                  onClick={() => handleEditClick()}
+                  type="button"
+                  class="btn btn-secondary"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => handleDeleteClick()}
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </div>

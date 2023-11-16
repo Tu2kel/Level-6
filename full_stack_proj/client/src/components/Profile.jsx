@@ -2,8 +2,11 @@ import React, { useContext, useEffect } from "react";
 import IssueForm from "./IssueForm"; 
 import IssueList from "./IssueList";
 import { UserContext } from "../context/UserProvider";
+// import Button from "react-bootstrap/Button";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default function Profile(props) {
+
+export default function Profile() {
   const { //grab from UserContext in UserProvider
     user: { username },
     addIssue,
@@ -31,6 +34,7 @@ export default function Profile(props) {
       {/*renders the IssueForm component and pass the addIssue function as a prop*/}
 
       <h3>Your Issue</h3>
+      {/* <Button className="bootbutton" >Boot button</Button> */}
 
       <IssueList issues={issues} />{" "}
       {/* renders the IssueList component and pass the user's issues as a prop. */}

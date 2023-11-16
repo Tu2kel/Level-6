@@ -21,13 +21,16 @@ export default function CommentForm ({ issueId }) {
   return (
     <div>
       <form onSubmit={handleCommentSubmit}> {/* click fires function to set new value */}
+      <br />
         <textarea
           name="comment"
           value={comment}
           onChange={handleCommentChange} /* click fires function  adds updated comment*/
           placeholder="Leave a Comment..."
         ></textarea>
-        <button type="submit">Submit Comment</button>
+        <div class="btn-group btn-group-sm" type="submit" role="group" >...
+        <button className="btn btn-secondary" title="Submit Comment"> 🗣️📢</button>
+        </div>
       </form>
     </div>
   );

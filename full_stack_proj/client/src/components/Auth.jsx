@@ -39,43 +39,54 @@ export default function Auth() {
 
   return (
     <div className="auth_container">
-      {/* <h1>Welcome </h1> */}
-
-      <p style={{ color: "red" }}>{errMsg}</p>
-
-      {!toggle ? ( // Conditionally render the sign-up form if 'toggle' is false
         <>
-          <h1>WELCOME </h1>
-          <h1>SignUp </h1>
-          <h2>Rock The Vote!</h2>
-          <AuthForm
-            handleChange={handleChange} //
-            handleSubmit={handleSignup}
-            inputs={inputs}
-            btnText="Sign up"
-            errMsg={errMsg}
-          />
-          <p id="join" onClick={() => toggleForm()}>
-            Already a member?
-          </p>
-        </>
-      ) : (
-        // else render the login form if 'toggle' is true
-        <>
-          <h1>🫡WELCOME BACK😀</h1>
-          <h1>Login</h1>
-          <AuthForm
-            handleChange={handleChange}
-            handleSubmit={handleLogin}
-            inputs={inputs}
-            btnText="Login"
-            errMsg={errMsg}
-          />
-          <p id="login" onClick={() => toggleForm()}>
-            Not a member?
-          </p>
-        </>
-      )}
+
+        <div className="alerts">
+          <p >{errMsg}</p>{" "}
+        </div>
+
+        {!toggle ? ( // Conditionally render the sign-up form if 'toggle' is false
+          <>
+            <div className="authHeader"> {/* get a disp grid */}
+              <h1>WELCOME </h1>            
+              <h2>To </h2>
+              <h3>Rock The Vote!</h3>
+            </div>
+        
+            <AuthForm
+              handleChange={handleChange} 
+              handleSubmit={handleSignup}
+              inputs={inputs}
+              btnText="Sign up"
+              errMsg={errMsg}
+            />
+            <p id="join" onClick={() => toggleForm()}>
+              Click to Login
+            </p>
+
+
+          </>
+        ) : (
+          // else render the login form if 'toggle' is true
+          <>
+            <div className="authHeader">
+              <h1>WELCOME BACK🫡  </h1>
+              <h3>Login</h3>
+            </div>
+
+            <AuthForm
+              handleChange={handleChange}
+              handleSubmit={handleLogin}
+              inputs={inputs}
+              btnText="Login"
+              errMsg={errMsg}
+            />
+            <p id="login" onClick={() => toggleForm()}>
+              Not a member?
+            </p>
+          </>
+        )}
+      </>
     </div>
   );
 }
