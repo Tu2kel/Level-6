@@ -72,6 +72,10 @@ input, select, textarea {
 	appearance: none;
 }
 
+.contactInfo{
+	font-family: 'Playfair Display', serif;
+}
+
 /* Basic */
 
 	@-ms-viewport {
