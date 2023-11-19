@@ -52,6 +52,23 @@ commentRouter.get("/:issueId", (req, res, next) => {
     });
 });
 
+//Put
+
+// commentRouter.put("/:commentId", (req, res, next) => {
+//   Comment.findOneAndUpdate(
+//     { _id: req.params.commentId, createdBy: req.auth._id },
+//     req.body,
+//     { new: true },
+//     (err, updatedComment) => {
+//       if (err) {
+//         res.status(500);
+//         return next(err);
+//       }
+//       return res.status(201).send(updatedComment);
+//     }
+//   );
+// });
+
 //❌Delete a comment (requires authentication)
 commentRouter.delete("/:commentId", (req, res, next) => {
   const commentId = req.params.commentId;

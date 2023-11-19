@@ -27,27 +27,26 @@ mongoose.connect(
 // Routes
 
 // Routes for login, logout
-  app.use("/auth", require("./routes/authRouter")); 
+app.use("/auth", require("./routes/authRouter"));
 
-  app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
-  
-    // ✅Routes for issues
-      // app.use("/issue", require("./routes/issueRouter")); 
-  
-  // ✅Routes for comments
-    // app.use("/comment", require("./routes/commentRouter")); 
-  // app.use("/vote", require("./routes/voteRouter")); // Routes for votes
+app.use("/user", require("./routes/userRouter")); //✅ User authentication routes
+
+// ✅Routes for issues
+// app.use("/issue", require("./routes/issueRouter"));
+
+// ✅Routes for comments
+// app.use("/comment", require("./routes/commentRouter"));
+// app.use("/vote", require("./routes/voteRouter")); // Routes for votes
 
 // Middleware for JWT authentication
-  app.use(
-    "/api",
-    expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
-  );
+app.use(
+  "/api",
+  expressjwt({ secret: process.env.SECRET, algorithms: ["HS256"] })
+);
 
 // Add routes for political issues, comments, and votes here
 app.use("/api/issue", require("./routes/issueRouter.js"));
 app.use("/api/comment", require("./routes/commentRouter"));
-
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -55,11 +54,9 @@ app.use((err, req, res, next) => {
   return res.status(500).json({
     errMsg: err.message,
   });
-
-  
-})
+});
 
 // Server Listen
-  app.listen(7263, () => {
-  console.log(`Listening on port 7263`);
+app.listen(7250, () => {
+  console.log(`RTV on port 7250`);
 });

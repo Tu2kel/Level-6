@@ -38,18 +38,7 @@ export default function Issue(props) {
     setIsEditing(false); //collapses edit form back to normal
   }
 
-  // $(function () {
-  //   $(".example-popover").popover({
-  //     container: "body",
-  //   });
-  // });
-
-  var popoverTriggerList = [].slice.call(
-    document.querySelectorAll('[data-bs-toggle="popover"]')
-  );
-  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl);
-  });
+   
 
   return (
     <div className="issue_infos">

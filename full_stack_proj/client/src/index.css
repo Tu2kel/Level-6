@@ -2,9 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
- 
 }
-
 
 .navbar {
   display: grid;
@@ -15,7 +13,6 @@
   text-decoration: underline;
   text-decoration-color: rebeccapurple;
   background: linear-gradient(hsl(0, 98%, 23%), transparent);
-  
 }
 
 .nav_link {
@@ -25,19 +22,17 @@
   cursor: pointer;
 
   transition: all 0.3s ease-in-out;
-
 }
 
-.profiles{
-  grid-column: 1 / 2 ;
+.profiles {
+  grid-column: 1 / 2;
   grid-row: 2;
-
 }
-.publics{
+.publics {
   grid-column: 2 / 3;
   grid-row: 2;
 }
-.logouts{
+.logouts {
   grid-column: 3 / 4;
   grid-row: 2;
 }
@@ -47,30 +42,31 @@
   text-decoration: underline overline;
 }
 
-
-
 .auth_container {
   display: grid;
-  /* align-items: center; */
-  /* flex-direction: column; */
-  height: 100%;
-  background: linear-gradient(35deg, darkred, blue, transparent); /*AMERICA COLORS*/
-  grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(6,1fr);
+ 
+  height: 100vh;
+  background: linear-gradient(
+    35deg,
+    darkred,
+    blue,
+    transparent
+  ); 
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  justify-items: center
 
 }
 
-.authHeader{
+.authHeader {
   grid-column: 2;
   grid-row: 2;
-  
-
 }
 
 .authHeader > h1 {
   position: relative;
   font-size: 2em;
-  color: blue;
+  color: hsl(240, 100%, 85%);
   right: 8vw;
 }
 .authHeader > h2 {
@@ -82,95 +78,79 @@
 .authHeader > h3 {
   position: relative;
   font-size: 2em;
-  color: darkred;
+  color: hsl(0, 100%, 57%);
   left: 7vw;
 }
 
 .auth_container > p {
   position: absolute;
-    top: 55%;
-    /* left: 35vw; */
+  top: 55%;
   justify-self: center;
   text-decoration: underline;
-  
 }
 
-.auth_container > form {
+.authForm {
   background-color: hsla(0, 0%, 67%, 0);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  
   grid-column: 2;
   grid-row: 3;
-
-  
-
 }
 
-.auth_container > form > input {
+.authForm > input {
   margin: 16px 8px;
   padding: 8px;
   border-radius: 4px;
+  background: hsl(0, 94%, 65%);
 }
 
-.auth_container > form > button {
-  /* margin: 16px 8px; */
+.authForm > button {
+  margin-top: 10vh;
   padding: 8px;
-  border-radius: 4px;
-
-  position: absolute;
-    top: 55%;
-    left: 34vw;
-
+  border-radius: 14%;
+    background: white;
 
 }
 
-
-.issue_list{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 50em;
+.authForm > button:hover,
+.authForm > button:focus{
+  background: hsl(240, 100%, 60%);
 }
 
-.issue_info{
+.issue_list {
   display: flex;
-  flex-direction: column;
-  /* border: 1px solid red ; */
-  height: 50vh;
-  width: 100%;
-  margin-top: 300px;
+  flex-wrap: wrap;
+  margin-top: 50em;
 }
 
+.issue_list > div {
+  flex: 1 0 21%; /* grow | shrink | basis */
+  margin: 1%;
+}
 
 .public {
   background: linear-gradient(35deg, darkred, blue, transparent);
 }
 
 .profile {
-
   background: linear-gradient(35deg, darkred, blue, transparent);
   margin-bottom: 16px;
-  
 }
 
 .profile > h1 {
   position: relative;
-    top: 20vh;
-    font-size: 3em;
-    text-align: center;
+  top: 20vh;
+  font-size: 3em;
+  text-align: center;
 }
-
 
 .issueForm {
-  
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.issueForm > input{
+.issueForm > input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -181,7 +161,7 @@
   background: var(--color);
 }
 
-.issueForm > button{
+.issueForm > button {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -190,109 +170,68 @@
   border-radius: 5px;
 }
 
-.addIssueBtn:hover, .addIssueBtn:focus{
+.addIssueBtn:hover,
+.addIssueBtn:focus {
   background: var(--color);
 }
 
-.profileTitle{
-    position: relative;
-    top: 20vh;
-    font-size: 3em;
-    text-align: center;
+.profileTitle {
+  position: relative;
+  top: 20vh;
+  font-size: 3em;
+  text-align: center;
 }
 
-.h3_Issue{
-      position: relative;
-    top: 24vh;
-    font-size: 1.5em;
-    text-align: center;
+.h3_Issue {
+  position: relative;
+  top: 24vh;
+  font-size: 1.5em;
+  text-align: center;
 }
 
-.issueBelowGrid{
+.issueBelowGrid {
   display: grid;
-    justify-items: center;
+  justify-items: center;
 }
 
-.issuesBelow{
+.issuesBelow {
   position: absolute;
   font-size: 2em;
   top: 80%;
 }
 
-
-.voteBtnUp, .voteBtnDown{
-  width: 60px;
-  position: relative;
-  left: 20px;
+.card {
+  margin-bottom: 2.5vh;
 }
 
-.voteBtnUp{
-  background-color: black;
-  top: 25px;
+.card-body {
+  background: linear-gradient(hsl(0, 98%, 23%), transparent);
+  color: blue;
 }
 
-.voteBtnDown{
-  position: relative;
-  left: 120px;
-  bottom: 25px;
-  background-color: rebeccapurple;
-
-}
-
-#upvoting{
-  position: relative;
-  left: 45px;
-  top: 40px;
-  color: rebeccapurple;
-  font-weight: bolder;
-  font-size: 20px;
-}
-
-#downvoting{
-  position: relative;
-  left: 145px;
-  bottom: 6px;
-  font-weight: bolder;
-  font-size: 20px;
-  color: rebeccapurple;
-
-}
-.edit{
-  width: 50px;
-  background-color: black;
-  color: rebeccapurple;
-  position: relative;
-  left: 25px;
-}
-
-.delete{
-  width: 50px;
-  background-color: rebeccapurple;
-  color: black;
-  position: relative;
-  left: 125px;
-  bottom: 40px;
-  
-}
-
-.edit, .delete{
-  margin-top: 20px;
-}
-
-button{
+button {
   cursor: pointer;
 }
 
-li{
+li {
   /* list-style-type: none; */
   list-style-type: decimal;
 }
 
-#join, #login{
+#join,
+#login {
   cursor: pointer;
+  color: white;
 }
 
-.public_page{
+#join:hover,
+#login:hover {
+  color: crimson;
+  text-decoration: underline overline;
+}
+
+.public_page {
+  /* grid-template-columns: repeat(4, 2fr); */
   position: relative;
   text-align: center;
   top: 5em;
@@ -300,5 +239,87 @@ li{
   font-size: 2em;
   text-decoration: underline;
   margin-bottom: -15em;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+}
+.card {
+  position: relative;
+}
+
+.card:hover .username {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+}
+
+.username {
+  display: none;
+}
+
+@media screen and (width < 2100px) {
+  
+  .profile {
+    padding: 3rem 2rem;
+  }
+
+  .profile > h1 {
+    margin-top: -10vh;
+  }
+}
+
+@media screen and (max-width <= 736px) {
+  /* .authForm{
+
+  } */
+
+  .navbar{
+    display: grid;
+    grid-row: repeat(2, 1fr);
+  }
+
+  
+
+  .profile {
+    padding: 2rem 1rem;
+  }
+
+  .profile > h1 {
+    margin-top: -10vh;
+  }
+
 
 }
+
+@media screen and (width <= 608px) {
+  
+
+  .profile {
+    padding: 2rem 1rem;
+  }
+
+  .navbar {
+    display: grid;
+    grid-row: repeat(2, 1fr);
+  }
+
+  .nav_link {
+    
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  
+}
+
+/* @media screen and (width < ){
+  .navbar{
+    width: 100%;
+  }
+} */

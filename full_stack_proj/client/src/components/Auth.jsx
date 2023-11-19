@@ -39,22 +39,25 @@ export default function Auth() {
 
   return (
     <div className="auth_container">
-        <>
-
+      {" "}
+      
+      <>
         <div className="alerts">
-          <p >{errMsg}</p>{" "}
+          <p>{errMsg}</p>{" "}
         </div>
 
         {!toggle ? ( // Conditionally render the sign-up form if 'toggle' is false
           <>
-            <div className="authHeader"> {/* get a disp grid */}
-              <h1>WELCOME </h1>            
+            <div className="authHeader">
+              {" "}
+              {/* get a disp grid */}
+              <h1>WELCOME </h1>
               <h2>To </h2>
               <h3>Rock The Vote!</h3>
             </div>
-        
-            <AuthForm
-              handleChange={handleChange} 
+
+            <AuthForm 
+              handleChange={handleChange}
               handleSubmit={handleSignup}
               inputs={inputs}
               btnText="Sign up"
@@ -63,14 +66,13 @@ export default function Auth() {
             <p id="join" onClick={() => toggleForm()}>
               Click to Login
             </p>
-
-
           </>
         ) : (
           // else render the login form if 'toggle' is true
           <>
             <div className="authHeader">
-              <h1>WELCOME BACK🫡  </h1>
+              <h1>WELCOME BACK🫡</h1>
+              <br />
               <h3>Login</h3>
             </div>
 

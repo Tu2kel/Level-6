@@ -24,6 +24,7 @@ export default function Profile() {
   // console.log('Profile comp, issues:', issues)
   return (
     <>
+    <div className="profileWrap" >
       <div className="profile">
         <h1 className="profileTitle">Welcome {username}!</h1>
         <h3 className="h3_Issue">Add An Issue to Vote on below</h3>
@@ -34,6 +35,7 @@ export default function Profile() {
       </div>
         <IssueList issues={issues} />{" "}
         {/* renders the IssueList component and pass the user's issues as a prop. */}
+      </div>
       </div>
     </>
   );

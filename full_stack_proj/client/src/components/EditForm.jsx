@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function EditForm({ issueData, save, handleCommentChange }) {
+export default function EditForm({ issueData, save }) {
   
   const [editedIssue, setEditedIssue] = useState({
     //initial state of the editedIssue is set to the original issue data
@@ -21,10 +21,11 @@ export default function EditForm({ issueData, save, handleCommentChange }) {
   function handleSubmit(e) {
     e.preventDefault();
     save(editedIssue); // saves new value/ state
+    console.log("save", save());
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="editForm" onSubmit={handleSubmit}>
       <input
         type="text"
         name="title"
@@ -47,7 +48,7 @@ export default function EditForm({ issueData, save, handleCommentChange }) {
       <textarea
         name="comment"
         value={editedIssue.comment}
-        onChange={handleCommentChange}
+        onChange={handleChange}
         placeholder="Leave a Comment..."
       ></textarea>
 
