@@ -1666,3 +1666,19 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+.mernBg{
+	background-color: #4d4f5011;
+}
+
+.m1, .m2, .m3, .m4{
+	width: 80px;
+	margin-left: 50px;
+	background-color: darkgray;
+	border-radius: 45%;
+	
+}
+
+
+
+
